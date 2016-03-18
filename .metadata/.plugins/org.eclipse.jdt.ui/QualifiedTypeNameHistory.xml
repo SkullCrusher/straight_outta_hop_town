@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.sun.syndication.feed.synd.SyndFeed"/>
+<fullyQualifiedTypeName name="com.sun.syndication.feed.synd.SyndEnclosureImpl"/>
+<fullyQualifiedTypeName name="com.sun.syndication.feed.synd.SyndEntryImpl"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="java.nio.charset.Charset"/>
+<fullyQualifiedTypeName name="com.sun.syndication.io.SyndFeedInput"/>
+<fullyQualifiedTypeName name="com.sun.syndication.feed.atom.Entry"/>
+<fullyQualifiedTypeName name="javax.lang.model.element.Element"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.xml.bind.Element"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Element"/>
+</qualifiedTypeNameHistroy>
