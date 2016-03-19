@@ -12,4 +12,27 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javax.xml.bind.Element"/>
 <fullyQualifiedTypeName name="org.w3c.dom.Element"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.WorldWindow"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.awt.WorldWindowGLJPanel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.WorldWind"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.Model"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.avlist.AVKey"/>
+<fullyQualifiedTypeName name="java.awt.event.ComponentListener"/>
+<fullyQualifiedTypeName name="javax.swing.border.LineBorder"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.awt.WorldWindowGLCanvas"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.BasicModel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.Earth.BMNGOneImage"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.LayerList"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.StarsLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.SkyGradientLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.Earth.BMNGWMSLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.Earth.CountryBoundariesLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.Earth.MSVirtualEarthLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.layers.LatLonGraticuleLayer"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.LayerPanel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwind.util.layertree.LayerTreeModel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.applications.worldwindow.features.swinglayermanager.LayerTreeModel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.FlatWorldPanel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ClickAndGoSelectListener"/>
 </qualifiedTypeNameHistroy>
