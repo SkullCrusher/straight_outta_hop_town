@@ -1,0 +1,7 @@
+*.log
+*.tis
+/.metadata
+/bin/*
+/.recommenders/*
+*.markers
+*.xml

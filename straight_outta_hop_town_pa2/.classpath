@@ -2,12 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/jogl-all.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/worldwind.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/plugin.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/vpf-symbols.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/worldwindx.jar"/>
-	<classpathentry kind="lib" path="C:/_/PA2_rebuild/straight_outta_hop_town_pa2/jdom-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/_/straight_outta_hop_town/straight_outta_hop_town_pa2/worldwind.jar"/>
+	<classpathentry kind="lib" path="C:/_/straight_outta_hop_town/straight_outta_hop_town_pa2/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/_/straight_outta_hop_town/straight_outta_hop_town_pa2/jdom-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/_/straight_outta_hop_town/straight_outta_hop_town_pa2/jogl-all.jar"/>
+	<classpathentry kind="lib" path="C:/_/straight_outta_hop_town/straight_outta_hop_town_pa2/worldwindx.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
