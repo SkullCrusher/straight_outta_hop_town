@@ -37,4 +37,5 @@
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ClickAndGoSelectListener"/>
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppPanel"/>
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppFrame"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 </qualifiedTypeNameHistroy>

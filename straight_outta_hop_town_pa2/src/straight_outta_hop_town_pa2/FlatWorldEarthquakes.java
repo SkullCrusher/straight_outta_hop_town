@@ -10,6 +10,7 @@ import gov.nasa.worldwindx.examples.FlatWorldPanel;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -17,26 +18,122 @@ import java.awt.event.*;
 
 public class FlatWorldEarthquakes extends ApplicationTemplate
 {
+		
     public static class AppFrame extends ApplicationTemplate.AppFrame
     {
       
         public AppFrame()
         {
            
-            // Add control panels
+            	// Add control panels
             JPanel controls = new JPanel();
             controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
-            // Add earthquakes view control panel
+            
+            	// Add earthquakes view control panel
             controls.add(makeEarthquakesPanel());
             
-            // Add flat world projection control panel
+            	// Add flat world projection control panel
             controls.add(new FlatWorldPanel(this.getWwd()));
     
-
             this.getLayerPanel().removeAll();
+            
+  /*
+   Create the list of rss feeds
+   */
+       
+            controls.add(MakeRSSTable());
+    		
+            //---- end of list -----
+            
+            
+            
+            
             this.getLayerPanel().add(controls,  BorderLayout.NORTH);
             
 
+        }
+        
+        private JPanel MakeRSSTable(){
+        	
+        	  JPanel controlPanel = new JPanel();
+              controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+              controlPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+
+
+       
+              
+                   
+              
+              
+          	JTable		table;
+          	JScrollPane scrollPane;
+                   
+
+      		// Create columns names
+      		String columnNames[] = { "Name", "Refresh Rate" };
+
+      		// Create some data
+      		String dataValues[][] =
+      		{
+      			{ "12",   "234" },
+      			{ "-123", "43" },
+      			{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+         		{ "93",   "89.2" },
+      			{ "279",  "9033"}
+      		};
+      		
+      		
+       
+            
+         //   Panel.add(Reset);        
+        //    controlPanel.add(Panel);       
+      		
+      		
+
+      		// Create a new table instance
+      		table = new JTable( dataValues, columnNames );
+      		
+      		table.setEnabled(false);  		
+
+
+      			// Add the table to a scrolling pane
+      		scrollPane = new JScrollPane( table );
+               
+            controlPanel.add(scrollPane);
+              
+              
+              
+              
+              return controlPanel;
         }
 
         private JPanel makeEarthquakesPanel()
