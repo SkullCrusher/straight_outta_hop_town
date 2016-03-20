@@ -35,4 +35,6 @@
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate"/>
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.FlatWorldPanel"/>
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ClickAndGoSelectListener"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppPanel"/>
+<fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppFrame"/>
 </qualifiedTypeNameHistroy>
