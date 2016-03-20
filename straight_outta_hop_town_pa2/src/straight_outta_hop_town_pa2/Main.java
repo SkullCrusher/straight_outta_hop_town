@@ -2,9 +2,17 @@
 package straight_outta_hop_town_pa2;
 
 import gov.nasa.worldwind.Configuration;
+import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.geom.LatLon;
+import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.*;
+import gov.nasa.worldwind.layers.RenderableLayer;
+import gov.nasa.worldwind.render.Offset;
+import gov.nasa.worldwind.render.PointPlacemark;
+import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 import gov.nasa.worldwind.view.orbit.*;
+import gov.nasa.worldwindx.applications.sar.WWPanel;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwindx.examples.FlatWorldPanel;
 
@@ -12,13 +20,15 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 
 public class Main extends ApplicationTemplate
 {
 		// The tool bar that the user interacts with.
 	static ToolBar GUI_Toolbar;
-			
+	
+				
     @SuppressWarnings("serial")
 	public static class AppFrame extends ApplicationTemplate.AppFrame
     {
@@ -26,6 +36,40 @@ public class Main extends ApplicationTemplate
     		// Creates the user control panel. 
         public AppFrame()
         {           
+       
+            //-Example of inserting a pin
+        	        	
+        	//Map =         	this.getWwjPanel().getWwd();
+        	
+        	 Random rand = new Random();
+            
+        	 for(int i = 0 ; i < 1000; i++){
+            RenderableLayer layer = new RenderableLayer();
+            
+           
+                                       
+            PointPlacemark pp = new PointPlacemark(Position.fromDegrees((-102) + rand.nextInt(100) + 1, (-102) + rand.nextInt(100) + 1, 1e4));
+            pp.setLabelText("Placemark A");
+            pp.setValue(AVKey.DISPLAY_NAME, "Clamp to ground, Label, Semi-transparent, Audio icon");
+            pp.setLineEnabled(false);
+            pp.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
+           // pp.setEnableLabelPicking(true); // enable label picking for this placemark
+            PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
+            attrs.setImageAddress("gov/nasa/worldwindx/examples/images/audioicon-64.png");
+            attrs.setImageColor(new Color(1f, 1f, 1f, 0.6f));
+            attrs.setScale(0.6);
+//            attrs.setImageOffset(new Offset(19d, 8d, AVKey.PIXELS, AVKey.PIXELS));
+            attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
+            pp.setAttributes(attrs);
+            layer.addRenderable(pp);
+           
+        
+            ApplicationTemplate.insertAfterPlacenames(this.getWwjPanel().getWwd(), layer);
+        	 }
+            
+            //---------
+        	
+        	
             	// Add control panels.
             JPanel controls = new JPanel();
             controls.setLayout(new BoxLayout(controls, BoxLayout.Y_AXIS));
@@ -218,7 +262,16 @@ public class Main extends ApplicationTemplate
         Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
         Configuration.setValue(AVKey.VIEW_CLASS_NAME, FlatOrbitView.class.getName());
         
+       // WWPanel.getInstance().getWwd(), layer);
+        
+    
+        
         	// Start the application.
-        ApplicationTemplate.start("WeatherRSS - Straight Outta Hop Town", AppFrame.class);        
+        ApplicationTemplate.start("WeatherRSS - Straight Outta Hop Town", AppFrame.class);   
+        
+       
+        
+        
+        
     }
 }
