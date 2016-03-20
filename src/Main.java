@@ -1,10 +1,9 @@
 
-package straight_outta_hop_town_pa2;
+
 
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.*;
 import gov.nasa.worldwind.layers.RenderableLayer;
@@ -12,7 +11,6 @@ import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.render.PointPlacemark;
 import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 import gov.nasa.worldwind.view.orbit.*;
-import gov.nasa.worldwindx.applications.sar.WWPanel;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwindx.examples.FlatWorldPanel;
 

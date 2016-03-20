@@ -1,4 +1,4 @@
-package straight_outta_hop_town_pa2;
+
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
