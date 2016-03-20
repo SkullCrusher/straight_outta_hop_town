@@ -5,3 +5,16 @@
 /.recommenders/*
 *.markers
 *.xml
+*.xmi
+*.index
+*.class
+.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt
+*.txt
+*.gen
+*.xml
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+*.dat
+*.resources
+.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml
+*.xml
+.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties

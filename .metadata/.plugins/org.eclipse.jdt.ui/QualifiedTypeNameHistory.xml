@@ -38,4 +38,11 @@
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppPanel"/>
 <fullyQualifiedTypeName name="gov.nasa.worldwindx.examples.ApplicationTemplate.AppFrame"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+<fullyQualifiedTypeName name="com.jogamp.newt.event.WindowEvent"/>
+<fullyQualifiedTypeName name="straight_outta_hop_town_pa2.ToolBar_Config_Settings"/>
+<fullyQualifiedTypeName name="java.awt.Toolkit"/>
+<fullyQualifiedTypeName name="javax.media.nativewindow.util.Dimension"/>
+<fullyQualifiedTypeName name="java.awt.Dimension"/>
 </qualifiedTypeNameHistroy>
