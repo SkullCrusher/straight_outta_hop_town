@@ -28,7 +28,7 @@ import java.net.URLEncoder;
 
 public class R_Parser {
 	
-	public void Parse(String areaCode){		
+	public void Parse(String areaCode, WorldWindow ww){		
 		
 		/*******areaCodes****
 		 * All - 'us'
@@ -154,7 +154,7 @@ public class R_Parser {
 						String encoded = URLEncoder.encode(areaTitle, "UTF-8");
 						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded;
 						String googleResult = request(googleRequestUrl);
-				//		System.out.println(googleResult);
+						System.out.println(googleResult);
 						doc_2 = dBuilder.parse(new InputSource(new ByteArrayInputStream(googleResult.getBytes("utf-8"))));
 						doc_2.getDocumentElement().normalize();
 						Double lat = Double.parseDouble(doc_2.getElementsByTagName("lat").item(0).getTextContent());
@@ -164,14 +164,7 @@ public class R_Parser {
 						newAlert.pushPosition(pos);
 					}
 					
-					plotter.plot(newAlert);
-					
-					//System.out.println("Staff id : " + eElement.getAttribute("id"));
-					/*System.out.println("First Name : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-					System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-					System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-					System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-*/
+					plotter.plot(newAlert, ww);
 				}
 			}} catch(Exception e){
 				e.printStackTrace();

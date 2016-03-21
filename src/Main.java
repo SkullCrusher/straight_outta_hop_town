@@ -1,8 +1,9 @@
-
+package package_1;
 
 
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.WorldWind;
+import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.globes.*;
@@ -18,7 +19,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Random;
 
 
 public class Main extends ApplicationTemplate
@@ -39,7 +39,7 @@ public class Main extends ApplicationTemplate
         	        	
         	//Map =         	this.getWwjPanel().getWwd();
         	
-        	 Random rand = new Random();
+        	/* Random rand = new Random();
             
         	 for(int i = 0 ; i < 1000; i++){
             RenderableLayer layer = new RenderableLayer();
@@ -60,11 +60,11 @@ public class Main extends ApplicationTemplate
             attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
             pp.setAttributes(attrs);
             layer.addRenderable(pp);
-           
-        
+        //    int var = this.getWwjPanel().getWwd();
             ApplicationTemplate.insertAfterPlacenames(this.getWwjPanel().getWwd(), layer);
+        	
         	 }
-            
+           */
             //---------
         	
         	
@@ -262,12 +262,15 @@ public class Main extends ApplicationTemplate
         
        // WWPanel.getInstance().getWwd(), layer);
         
-    
-        
+
         	// Start the application.
-        ApplicationTemplate.start("WeatherRSS - Straight Outta Hop Town", AppFrame.class);   
+        ApplicationTemplate.AppFrame af =  ApplicationTemplate.start("WeatherRSS - Straight Outta Hop Town", AppFrame.class);   
         
-       
+       WorldWindow ww = af.getWwjPanel().getWwd();
+       //ww.
+       R_Parser parser = new R_Parser();
+       parser.Parse("al", ww);
+     //  ApplicationTemplate.
         
         
         

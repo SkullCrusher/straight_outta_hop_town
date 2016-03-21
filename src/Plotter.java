@@ -3,6 +3,7 @@ package package_1;
 import java.awt.Color;
 
 import gov.nasa.worldwind.WorldWind;
+import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.RenderableLayer;
@@ -12,9 +13,9 @@ import gov.nasa.worldwind.render.PointPlacemark;
 import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
-public class Plotter extends ApplicationTemplate{
+public class Plotter {
 	
-	public void plot(Alert rssUnit){
+	public void plot(Alert rssUnit,WorldWindow ww){
 		//	PointPlacemark ppm = new PointPlacemark(rssUnit.getPosition());
 		Position pos;
 
@@ -38,10 +39,7 @@ public class Plotter extends ApplicationTemplate{
 		    ppm.setAttributes(attrs);
 		    layer.addRenderable(ppm);
 		   
-
-		  //  ApplicationTemplate.insertAfterPlacenames(this.getWwjPanel().getWwd(), layer);
-		//	DrawContext dc = new DrawContext();
-		//	ppm.render(dc);
+		    ApplicationTemplate.insertAfterPlacenames(ww, layer);
 			
 		}
 	}
