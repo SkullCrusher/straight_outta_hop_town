@@ -22,15 +22,14 @@ public class ToolBar_Search_Button {
 	
 	public void Create() {
 		
-		if(windowOpen){
-			return;
-		}
+		if(windowOpen){ return; }
 		
 		JFrame frame = new JFrame("Search");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//frame.add(P);
-		//frame.getContentPane().add(P);
+		
+		
+		
 				
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
