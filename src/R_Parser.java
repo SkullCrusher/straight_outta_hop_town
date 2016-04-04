@@ -11,6 +11,7 @@ import org.xml.sax.InputSource;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.layers.RenderableLayer;
 
 import org.w3c.dom.Node;
 
@@ -28,12 +29,10 @@ import java.net.URLEncoder;
 
 public class R_Parser {
 	
-	public void Parse(String areaCode, WorldWindow ww){		
-		
+	public void Parse(String areaCode){		
 
 			String html = request("http://alerts.weather.gov/cap/"+areaCode+".php?x=1");
 			//System.out.println(html);
-			String stateName = stateLookup(areaCode);
 			Alert newAlert = new Alert();
 		    Plotter plotter = new Plotter();
 	//	    Position pos = new Position(null, null,0);
@@ -123,10 +122,7 @@ public class R_Parser {
 					//	System.out.println(areaTitle);
 						String encoded = URLEncoder.encode(areaTitle, "UTF-8");
 					//	Strimg stateName =
-						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded+","+stateName+",USA";
-						if(stateName.equals("ALL")){
-							googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded+",USA";
-						}
+						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded+","+areaCode+",USA";
 						String googleResult = request(googleRequestUrl);
 						//System.out.println(googleResult);
 					//	System.out.println(googleResult);
@@ -138,8 +134,7 @@ public class R_Parser {
 						Position pos = new Position(Angle.fromDegrees(lat), Angle.fromDegrees(lng), 0);
 						newAlert.pushPosition(pos);
 					}
-					
-					plotter.plot(newAlert, ww);
+					plotter.plot(newAlert);
 				}
 			}} catch(Exception e){
 				e.printStackTrace();
@@ -192,129 +187,7 @@ public class R_Parser {
 		
 	}
 	    return null;
-	}
-	
-	public String stateLookup(String ac){
-		if(ac.equals("us")){
-			return "ALL";
-		} else if (ac.equals("al")){
-			return "Alabama";
-		} else if (ac.equals("ak")){
-			return "Alaska";
-		} else if (ac.equals("as")){
-			return "America Samoa";
-		} else if (ac.equals("az")){
-			return "Arizona";
-		} else if (ac.equals("ar")) {
-			return "Arkansas";
-		} else if (ac.equals("ca")) {
-			return "California";
-		} else if (ac.equals("co")) {
-			return "Colorado";
-		} else if (ac.equals("ct")) {
-			return "Connecticut";
-		} else if (ac.equals("de")) {
-			return "Delaware";
-		} else if (ac.equals("dc")) {
-			return "Disctrict of Columbia";
-		} else if (ac.equals("fl")) {
-			return "Florida";
-		} else if (ac.equals("ga")) {
-			return "Georgia";
-		} else if (ac.equals("gu")) {
-			return "Guam";
-		} else if (ac.equals("hi")) {
-			return "Hawaii";
-		} else if (ac.equals("id")) {
-			return "Idaho";
-		} else if (ac.equals("il")) {
-			return "Illinois";
-		} else if (ac.equals("in")) {
-			return "Indiana";
-		} else if (ac.equals("ia")) {
-			return "Iowa";
-		} else if (ac.equals("ks")){
-			return "Kansas";
-		} else if (ac.equals("ky")) {
-			return "Kentucky";
-		} else if (ac.equals("la")) {
-			return "Louisiana";
-		} else if (ac.equals("me")) {
-			return "Maine";
-		} else if (ac.equals("mp")) {
-			return "Marianas";
-		} else if (ac.equals("md")) {
-			return "Maryland";
-		} else if (ac.equals("ma")) {
-			return "Massachusetts";
-		} else if (ac.equals("mi")) {
-			return "Michigan";
-		} else if (ac.equals("um")) {
-			return "Midway Island";
-		} else if (ac.equals("mn")) {
-			return "Minnesota";
-		} else if (ac.equals("ms")) {
-			return "Mississippi";
-		} else if (ac.equals("mo")) {
-			return "Missouri";
-		} else if (ac.equals("mt")) {
-			return "Montana";
-		} else if (ac.equals("nv")) {
-			return "Nevada";
-		} else if (ac.equals("ne")) {
-			return "Nebraska";
-		} else if (ac.equals("nh")) {
-			return "New Hampshire";
-		} else if (ac.equals("nj")) {
-			return "New Jersey";
-		} else if (ac.equals("nm")) {
-			return "New Mexico";
-		} else if (ac.equals("ny")) {
-			return "New York";
-		} else if (ac.equals("nc")) {
-			return "North Carolina";
-		} else if (ac.equals("nd")) {
-			return "North Dakota";
-		} else if (ac.equals("oh")) {
-			return "Ohio";
-		} else if (ac.equals("ok")) {
-			return "Oklahoma";
-		} else if (ac.equals("or")) {
-			return "Oregon";
-		} else if (ac.equals("pa")) {
-			return "Pennsylvania";
-		} else if (ac.equals("pr")) {
-			return "Puerto Rico";
-		} else if (ac.equals("ri")) {
-			return "Rhode Island";
-		} else if (ac.equals("sc")) {
-			return "South Carolina";
-		} else if (ac.equals("sd")) {
-			return "South Dakota";
-		} else if (ac.equals("tn")) {
-			return "Tennessee";
-		} else if (ac.equals("tx")) {
-			return "Texas";
-		} else if (ac.equals("ut")) {
-			return "Utah";
-		} else if (ac.equals("vt")) {
-			return "Vermont";
-		} else if (ac.equals("vi")) {
-			return "Virgin Islands";
-		} else if (ac.equals("va")) {
-			return "Virginia";
-		} else if (ac.equals("wa")) {
-			return "Washington";
-		} else if (ac.equals("wv")) {
-			return "West Virginia";
-		} else if (ac.equals("wi")) {
-			return "Wisconsin";
-		} else if (ac.equals("wy")){
-			return "Wyoming";
-		}		
-		return "";//stateName
-	}
-	
+	}	
 }
 
 

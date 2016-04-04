@@ -267,9 +267,18 @@ public class Main extends ApplicationTemplate
         ApplicationTemplate.AppFrame af =  ApplicationTemplate.start("WeatherRSS - Straight Outta Hop Town", AppFrame.class);   
         
        WorldWindow ww = af.getWwjPanel().getWwd();
+       RenderableLayer layer = new RenderableLayer();
+       Plotter plotter = new Plotter();
+       //now we dont have to pass these anywhere
+       plotter.setLayer(layer);
+       plotter.setWw(ww);
        //ww.
        R_Parser parser = new R_Parser();
-       parser.Parse("al", ww);
+       //this layer and map need to go everywhere bassically because thats the only way to interact
+       // with the existing objects
+       parser.Parse("al");
+       plotter.clearMap();
+       
      //  ApplicationTemplate.
         
         
