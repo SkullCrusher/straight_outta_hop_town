@@ -125,6 +125,9 @@ public class R_Parser {
 					//	System.out.println(googleResult);
 						doc_2 = dBuilder.parse(new InputSource(new ByteArrayInputStream(googleResult.getBytes("utf-8"))));
 						doc_2.getDocumentElement().normalize();
+						if(doc_2.getElementsByTagName("lat").item(0)==null){
+							continue;
+						}
 						Double lat = Double.parseDouble(doc_2.getElementsByTagName("lat").item(0).getTextContent());
 						Double lng = Double.parseDouble(doc_2.getElementsByTagName("lng").item(0).getTextContent());
 					//	Angle lat_a = new Angle();
