@@ -53,7 +53,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		 "va", "wa", "wv", "wi",
 		 "wy" };
 		
-		if((arg < 0) || (arg >= 50)){
+		if((arg < 0) || (arg >= 58)){
 			return "";
 		}else{
 			return Codes[arg];
