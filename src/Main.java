@@ -21,6 +21,8 @@ public class Main extends ApplicationTemplate
 		// The tool bar that the user interacts with.
 	static ToolBar GUI_Toolbar;
 	
+	static Data_Manager Manager;
+	
 				
     @SuppressWarnings("serial")
 	public static class AppFrame extends ApplicationTemplate.AppFrame
@@ -109,35 +111,6 @@ public class Main extends ApplicationTemplate
       			{ "-123", "43" },
       			{ "93",   "89.2" },
          		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
-         		{ "93",   "89.2" },
       			{ "279",  "9033"}
       		};
       		
@@ -153,7 +126,7 @@ public class Main extends ApplicationTemplate
       		scrollPane = new JScrollPane( table );
                
       			// Add the scrolling pane to the panel containing the scrollpane.
-            controlPanel.add(scrollPane);              
+            //controlPanel.add(scrollPane);              
               
               
               	// Return the panel to be added to the main control panel.
@@ -247,6 +220,7 @@ public class Main extends ApplicationTemplate
     	
     		// Create a new instance of the tool bar.
     	GUI_Toolbar = new ToolBar();
+    	Manager = new Data_Manager();
     	
         	// Adjust configuration values before instantiation.
         Configuration.setValue(AVKey.INITIAL_LATITUDE, 0);
@@ -264,19 +238,20 @@ public class Main extends ApplicationTemplate
        WorldWindow ww = af.getWwjPanel().getWwd();
        RenderableLayer layer = new RenderableLayer();
        Plotter plotter = new Plotter();
-       //now we dont have to pass these anywhere
+       
+       		// now we dont have to pass these anywhere
        plotter.setLayer(layer);
        plotter.setWw(ww);
-       //ww.
+       
+       GUI_Toolbar.SetOb(Manager);
+      /* 
        R_Parser parser = new R_Parser();
        //this layer and map need to go everywhere bassically because thats the only way to interact
        // with the existing objects
        parser.Parse("al");
        plotter.clearMap();
-       
-     //  ApplicationTemplate.
+   */
         
-        
-        
+      
     }
 }

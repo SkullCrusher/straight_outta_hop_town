@@ -15,6 +15,10 @@ public class ToolBar {
 		Config_Settings = new ToolBar_Config_Settings();
 		AddRemove 		= new ToolBar_AddRemove_RSS();		
 	}
+	
+	public void SetOb(Data_Manager arg){
+		AddRemove.addObserver(arg);
+	}
 
 		// The function to create the search window
 	public void Create_Search_Dialog(){

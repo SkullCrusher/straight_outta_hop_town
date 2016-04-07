@@ -1,7 +1,6 @@
 package package_1;
 
 
-
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -18,7 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ToolBar_AddRemove_RSS extends Observable {
-
+	
 	public String RSS = "";
 	public boolean Add = false;
 	public boolean Remove = false;
@@ -69,10 +68,11 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		
 		RSS = Code;
 		Add = true;
+		Remove = false;
 		
 		// Add directly to the data manager.
 		setChanged();
-	    notifyObservers(Code);
+	    notifyObservers(this);
 	}
 	
 	// Remove the RSS feed from the data manager.
@@ -81,11 +81,12 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		String Code = GetCodeFromIndex(index);
 		
 		RSS = Code;
-		Add = true;
+		Add = false;
+		Remove = true;
 		
 		// Add directly to the data manager.
 		setChanged();
-	    notifyObservers(Code);
+	    notifyObservers(this);
 	}
 	
 	public void Create() {
@@ -148,7 +149,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		
 		Remove.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){                	
-				   AddRSS(Select.getSelectedIndex());
+				   RemoveRSS(Select.getSelectedIndex());
 				   
 				   OnCloseEvent();
 				   frame.dispose();			   			 
