@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,8 +17,12 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class ToolBar_AddRemove_RSS {
+public class ToolBar_AddRemove_RSS extends Observable {
 
+	public String RSS = "";
+	public boolean Add = false;
+	public boolean Remove = false;
+	
 	public ToolBar_AddRemove_RSS(){
 		windowOpen = false;
 	}
@@ -62,8 +67,12 @@ public class ToolBar_AddRemove_RSS {
 		
 		String Code = GetCodeFromIndex(index);
 		
-		// Add directly to the data manager.
+		RSS = Code;
+		Add = true;
 		
+		// Add directly to the data manager.
+		setChanged();
+	    notifyObservers(Code);
 	}
 	
 	// Remove the RSS feed from the data manager.
@@ -71,8 +80,12 @@ public class ToolBar_AddRemove_RSS {
 		
 		String Code = GetCodeFromIndex(index);
 		
-		// Add directly to the data manager.
+		RSS = Code;
+		Add = true;
 		
+		// Add directly to the data manager.
+		setChanged();
+	    notifyObservers(Code);
 	}
 	
 	public void Create() {
@@ -95,69 +108,28 @@ public class ToolBar_AddRemove_RSS {
           
 		
 		String[] RSS_List = {  
-		 "All",
-		 "Alabama",
-		 "Alaska",
-		 "America Samoa",
-		 "Arizona",
-		 "Arkansas",
-		 "California",
-		 "Colorado",
-		 "Connecticut",
-		 "Delaware",
-		 "District of Columbia",
-		 "Florida",
-		 "Georgia",
-		 "Guam",
-		 "Hawaii ",
-		 "Idaho",
-		 "Illinois",
-		 "Indiana",
-		 "Iowa",
-		 "Kansas",
-		 "Kentucky",
-		 "Louisiana",
-		 "Maine",
-		 "Marianas",
-		 "Maryland",
-		 "Massachusetts",
-		 "Michigan",
-		 "Midway Island",
-		 "Minnesota",
-		 "Mississippi",
-		 "Missouri",
-		 "Montana",
-		 "Nevada",
-		 "Nebraska",
-		 "New Hampshire",
-		 "New Jersey",
-		 "New Mexico",
-		 "New York",
-		 "North Carolina",
-		 "North Dakota",
-		 "Ohio",
-		 "Oklahoma",
-		 "Oregon",
-		 "Pennsylvania",
-		 "Puerto Rico",
-		 "Rhode Island",
-		 "South Carolina",
-		 "South Dakota",
-		 "Tennessee",
-		 "Texas",
-		 "Utah",
-		 "Vermont",
-		 "Virgin Islands",
-		 "Virginia",
-		 "Washington",
-		 "West Virginia",
-		 "Wisconsin",
-		 "Wyoming"};
+		 "All", "Alabama", "Alaska",
+		 "America Samoa", "Arizona", "Arkansas",
+		 "California", "Colorado", "Connecticut",
+		 "Delaware", "District of Columbia", "Florida",
+		 "Georgia", "Guam", "Hawaii ", "Idaho", 
+		 "Illinois", "Indiana", "Iowa",
+		 "Kansas", "Kentucky", "Louisiana",
+		 "Maine", "Marianas", "Maryland",
+		 "Massachusetts", "Michigan", "Midway Island",
+		 "Minnesota", "Mississippi", "Missouri",
+		 "Montana", "Nevada", "Nebraska",
+		 "New Hampshire", "New Jersey", "New Mexico",
+		 "New York", "North Carolina", "North Dakota",
+		 "Ohio", "Oklahoma", "Oregon",
+		 "Pennsylvania", "Puerto Rico", "Rhode Island",
+		 "South Carolina", "South Dakota", "Tennessee",
+		 "Texas", "Utah", "Vermont", "Virgin Islands",
+		 "Virginia", "Washington", "West Virginia",
+		 "Wisconsin", "Wyoming"};
 		
 		
 		JComboBox Select = new JComboBox(RSS_List);
-		
-		
 		
 		CS_Panel.add(Select);
 		
@@ -169,7 +141,6 @@ public class ToolBar_AddRemove_RSS {
 		   public void actionPerformed(ActionEvent event){                	
 			   AddRSS(Select.getSelectedIndex());
 			   
-			   
 			   OnCloseEvent();
 			   frame.dispose();			   			 
 		   }
@@ -178,7 +149,6 @@ public class ToolBar_AddRemove_RSS {
 		Remove.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){                	
 				   AddRSS(Select.getSelectedIndex());
-				   
 				   
 				   OnCloseEvent();
 				   frame.dispose();			   			 

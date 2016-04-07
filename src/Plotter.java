@@ -1,7 +1,5 @@
 package package_1;
 
-import java.awt.Color;
-
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
