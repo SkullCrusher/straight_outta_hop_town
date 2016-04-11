@@ -21,50 +21,45 @@ public class ToolBar_Config_Settings extends Observable {
 	public JTable table = null;
 	
     class MyTableModel extends AbstractTableModel {
-    	//String[] columnNames = {"Feed name", "Refresh time", "Enabled"};
+
     	
-    	public ArrayList<String> columnNames = new ArrayList();//{"Feed name", "Refresh time", "Enabled"});
+    	public ArrayList<String> columnNames = new ArrayList();
     	
     	public ArrayList<Object[]> data = new ArrayList<Object[]>();
-/*
-		Object[][] data = {
-				{"Mary",   new Integer(5),  new Boolean(true)},		
-				{"Sharon", new Integer(20), new Boolean(true)},		
-				{"Philip", new Integer(10), new Boolean(true)}		
-		};	
-		*/
+
 		
 		public MyTableModel(){
+			
+				// Set the column names.			
 			columnNames.add(new String("Feed name"));
 			columnNames.add(new String("Refresh time"));
 			columnNames.add(new String("Enabled"));
 			
-			Object[] t1 = {"Mary",   new Integer(5),  new Boolean(true)};
+				// Load in the currently added RSS feeds.			
+			Data_Manager temp = new Data_Manager();
 			
-			Object[] t2 =	{"Sharon", new Integer(20), new Boolean(true)};
-			Object[] t3 =	{"Philip", new Integer(10), new Boolean(true)};
-			
-			data.add(t1);
-			data.add(t2);
-			data.add(t3);
-			
+				// Add each RSS feed.
+			for(int i = 0; i < temp.RSS_FEEDS.size(); i++){
+				
+					// This is brutal.
+				Object[] t1 = {
+						temp.StateCodeToState(temp.RSS_FEEDS.get(i).RSS_FEED),   
+						temp.RSS_FEEDS.get(i).Refresh_Delay,  
+						temp.RSS_FEEDS.get(i).Enabled};
+				
+				data.add(t1);
+			}			
 		}
 		
         public int getColumnCount() {
-             	
-            //return columnNames.length;
         	return columnNames.size();
         }
 
-        public int getRowCount() {
-        	
+        public int getRowCount() {        	
         	return data.size();
-        	
-           // return data.length;
         }
 
         public String getColumnName(int col) {
-           // return columnNames[col];
         	 return columnNames.get(col);
         }
 
@@ -73,8 +68,6 @@ public class ToolBar_Config_Settings extends Observable {
         	Object temp[] = data.get(row);
         	
         	return temp[col];
-        	
-           // return data[row][col];
         }
 
         public Class getColumnClass(int c) {
@@ -90,8 +83,6 @@ public class ToolBar_Config_Settings extends Observable {
         }
 
         public void setValueAt(Object value, int row, int col) {            
-            //data[row][col] = value;
-        	
         	((Object[])data.get(row))[col] = value;
             
             fireTableCellUpdated(row, col);

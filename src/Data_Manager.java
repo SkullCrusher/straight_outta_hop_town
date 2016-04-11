@@ -21,20 +21,113 @@ public class Data_Manager implements Observer {
 		// A container for all of the feeds that have been added to the map.
 	public static ArrayList<Feed> RSS_FEEDS = new ArrayList();
 	
-		// TO DO JORDAN: This takes a full name of the RSS feed and returns the state code so it will go into 
-	private String StateToStateCode(String arg){
+		// This takes a full name of the RSS feed and returns the state code.
+	public String StateToStateCode(String arg){
+					
+		String Codes[] = {"us",
+		"al", "ak", "as", "az",
+		"ar", "ca", "co", "ct",
+		"de", "dc", "fl", "ga",
+		"gu", "hi", "id", "il",
+		"in", "ia", "ks", "ky",
+		"la", "me", "mp", "md",
+		"ma", "mi", "um", "mn",
+		"ms", "mo", "mt", "nv",
+		"ne", "nh", "nj", "nm",
+		"ny", "nc", "nd", "oh",
+		"ok", "or", "pa", "pr",
+		"ri", "sc", "sd", "tn",
+		"tx", "ut", "vt", "vi",
+		"va", "wa", "wv", "wi",
+		"wy" };
 		
-		if(arg == "Alaska"){
-			return "ak";
+		String[] RSS_List = {  
+		"All", "Alabama", "Alaska",
+		"America Samoa", "Arizona", "Arkansas",
+		"California", "Colorado", "Connecticut",
+		"Delaware", "District of Columbia", "Florida",
+		"Georgia", "Guam", "Hawaii ", "Idaho", 
+		"Illinois", "Indiana", "Iowa",
+		"Kansas", "Kentucky", "Louisiana",
+		"Maine", "Marianas", "Maryland",
+		"Massachusetts", "Michigan", "Midway Island",
+		"Minnesota", "Mississippi", "Missouri",
+		"Montana", "Nevada", "Nebraska",
+		"New Hampshire", "New Jersey", "New Mexico",
+		"New York", "North Carolina", "North Dakota",
+		"Ohio", "Oklahoma", "Oregon",
+		"Pennsylvania", "Puerto Rico", "Rhode Island",
+		"South Carolina", "South Dakota", "Tennessee",
+		"Texas", "Utah", "Vermont", "Virgin Islands",
+		"Virginia", "Washington", "West Virginia",
+		"Wisconsin", "Wyoming"};
+				
+		// Find the index of the state code and return the correct state.		
+		for(int i = 0; i < RSS_List.length; i++){
+			if(arg.equals(RSS_List[i])){
+				return Codes[i];						
+			}
 		}
+			
 		
-		if(arg == "Arizona"){
-			return "az";
-		}
-		
-			// debugging.
-		return "ak";
+			// fail safe.
+		return "NULL";
 	}
+	
+		// This takes a state code of the RSS feed and returns the state. 
+	public String StateCodeToState(String arg){
+				
+		String Codes[] = {"us",
+				"al", "ak", "as", "az",
+				"ar", "ca", "co", "ct",
+				"de", "dc", "fl", "ga",
+				"gu", "hi", "id", "il",
+				"in", "ia", "ks", "ky",
+				"la", "me", "mp", "md",
+				"ma", "mi", "um", "mn",
+				"ms", "mo", "mt", "nv",
+				"ne", "nh", "nj", "nm",
+				"ny", "nc", "nd", "oh",
+				"ok", "or", "pa", "pr",
+				"ri", "sc", "sd", "tn",
+				"tx", "ut", "vt", "vi",
+				"va", "wa", "wv", "wi",
+				"wy" };
+				
+				String[] RSS_List = {  
+				"All", "Alabama", "Alaska",
+				"America Samoa", "Arizona", "Arkansas",
+				"California", "Colorado", "Connecticut",
+				"Delaware", "District of Columbia", "Florida",
+				"Georgia", "Guam", "Hawaii ", "Idaho", 
+				"Illinois", "Indiana", "Iowa",
+				"Kansas", "Kentucky", "Louisiana",
+				"Maine", "Marianas", "Maryland",
+				"Massachusetts", "Michigan", "Midway Island",
+				"Minnesota", "Mississippi", "Missouri",
+				"Montana", "Nevada", "Nebraska",
+				"New Hampshire", "New Jersey", "New Mexico",
+				"New York", "North Carolina", "North Dakota",
+				"Ohio", "Oklahoma", "Oregon",
+				"Pennsylvania", "Puerto Rico", "Rhode Island",
+				"South Carolina", "South Dakota", "Tennessee",
+				"Texas", "Utah", "Vermont", "Virgin Islands",
+				"Virginia", "Washington", "West Virginia",
+				"Wisconsin", "Wyoming"};
+						
+				// Find the index of the state and return the correct state code.				
+				for(int i = 0; i < Codes.length; i++){
+					if(arg.equals(Codes[i])){
+						return RSS_List[i];
+					}
+				}
+	
+		
+				// Fail safe.
+		return "NULL";
+	}
+	
+	
 	
 	
 	public void addFeed (String areaCode){
