@@ -3,38 +3,150 @@ package package_1;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Observable;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 
-public class ToolBar_Config_Settings {
+
+public class ToolBar_Config_Settings extends Observable {
 	
-	public ToolBar_Config_Settings(){
-		windowOpen = false;
-	}
+	public JTable table = null;
+	
+    class MyTableModel extends AbstractTableModel {
+    	//String[] columnNames = {"Feed name", "Refresh time", "Enabled"};
+    	
+    	public ArrayList<String> columnNames = new ArrayList();//{"Feed name", "Refresh time", "Enabled"});
+    	
+    	public ArrayList<Object[]> data = new ArrayList<Object[]>();
+/*
+		Object[][] data = {
+				{"Mary",   new Integer(5),  new Boolean(true)},		
+				{"Sharon", new Integer(20), new Boolean(true)},		
+				{"Philip", new Integer(10), new Boolean(true)}		
+		};	
+		*/
+		
+		public MyTableModel(){
+			columnNames.add(new String("Feed name"));
+			columnNames.add(new String("Refresh time"));
+			columnNames.add(new String("Enabled"));
+			
+			Object[] t1 = {"Mary",   new Integer(5),  new Boolean(true)};
+			
+			Object[] t2 =	{"Sharon", new Integer(20), new Boolean(true)};
+			Object[] t3 =	{"Philip", new Integer(10), new Boolean(true)};
+			
+			data.add(t1);
+			data.add(t2);
+			data.add(t3);
+			
+		}
+		
+        public int getColumnCount() {
+             	
+            //return columnNames.length;
+        	return columnNames.size();
+        }
+
+        public int getRowCount() {
+        	
+        	return data.size();
+        	
+           // return data.length;
+        }
+
+        public String getColumnName(int col) {
+           // return columnNames[col];
+        	 return columnNames.get(col);
+        }
+
+        public Object getValueAt(int row, int col) {
+        	
+        	Object temp[] = data.get(row);
+        	
+        	return temp[col];
+        	
+           // return data[row][col];
+        }
+
+        public Class getColumnClass(int c) {
+            return getValueAt(0, c).getClass();
+        }
+ 
+        public boolean isCellEditable(int row, int col) {
+            if (col < 1) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        public void setValueAt(Object value, int row, int col) {            
+            //data[row][col] = value;
+        	
+        	((Object[])data.get(row))[col] = value;
+            
+            fireTableCellUpdated(row, col);
+        }    
+    }
+
+	public ToolBar_Config_Settings(){ windowOpen = false; }
 	
 		// If the window is currently open.
 	private boolean windowOpen;
 	
 		// Any cleanup that needs to happen plus allow a new one be opened.
-	private void OnCloseEvent(){
-		windowOpen = false;
-	}
+	private void OnCloseEvent(){ windowOpen = false; }
+
 	
 	public void Create() {
 		
-		if(windowOpen){
-			return;
-		}
-		
+		if(windowOpen){ return;} 
+				
 		JFrame frame = new JFrame("Configuration Settings");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//frame.add(P);
-		//frame.getContentPane().add(P);
-				
+		
+		//JTable table = new JTable(new MyTableModel());
+		table = new JTable(new MyTableModel());
+        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+        
+               
+        
+        table.getModel().addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent e) {
+               System.out.println(e.getColumn());
+                             
+           			// Add directly to the data manager.
+       			setChanged();
+       			notifyObservers(table); 
+            }
+          });
+        
+        
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		
+		frame.add(scrollPane);
+	
+								
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	
+		    	setChanged();
+       			notifyObservers(this); 
+		    	
 		    	OnCloseEvent();
 		    }
 		});

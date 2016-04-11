@@ -18,6 +18,8 @@ public class ToolBar {
 	
 	public void SetOb(Data_Manager arg){
 		AddRemove.addObserver(arg);
+		Config_Settings.addObserver(arg);
+		Search.addObserver(arg);
 	}
 
 		// The function to create the search window

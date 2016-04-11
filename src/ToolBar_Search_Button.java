@@ -3,11 +3,12 @@ package package_1;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Observable;
 
 import javax.swing.JFrame;
 
-public class ToolBar_Search_Button {
-
+public class ToolBar_Search_Button extends Observable {
+	
 	public ToolBar_Search_Button(){
 		windowOpen = false;
 	}

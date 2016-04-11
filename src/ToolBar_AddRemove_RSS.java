@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ToolBar_AddRemove_RSS extends Observable {
+
 	
 	public String RSS = "";
 	public boolean Add = false;
@@ -130,9 +131,10 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		 "Wisconsin", "Wyoming"};
 		
 		
-		JComboBox Select = new JComboBox(RSS_List);
+		JComboBox Select_Add = new JComboBox(RSS_List);
+		JComboBox Select_Remove = new JComboBox(RSS_List);
 		
-		CS_Panel.add(Select);
+		CS_Panel.add(Select_Add);
 		
 		JButton Add    = new JButton("Add Feed");
 		JButton Remove = new JButton("Remove Feed");
@@ -140,7 +142,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
     	// The function to be called when the button is pressed.
 		Add.addActionListener(new ActionListener(){
 		   public void actionPerformed(ActionEvent event){                	
-			   AddRSS(Select.getSelectedIndex());
+			   AddRSS(Select_Add.getSelectedIndex());
 			   
 			   OnCloseEvent();
 			   frame.dispose();			   			 
@@ -149,7 +151,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		
 		Remove.addActionListener(new ActionListener(){
 			   public void actionPerformed(ActionEvent event){                	
-				   RemoveRSS(Select.getSelectedIndex());
+				   RemoveRSS(Select_Remove.getSelectedIndex());
 				   
 				   OnCloseEvent();
 				   frame.dispose();			   			 
@@ -157,6 +159,9 @@ public class ToolBar_AddRemove_RSS extends Observable {
 			});
 		
 		 CS_Panel.add(Add);
+		 
+		 CS_Panel.add(Select_Remove);
+		 
 		 CS_Panel.add(Remove);
 		 
 		controls.add( CS_Panel);
