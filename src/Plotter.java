@@ -24,8 +24,8 @@ public class Plotter {
 			ppm = new PointPlacemark(pos);
 		   
 		    
-		    ppm.setLabelText("Placemark A");
-		    ppm.setValue(AVKey.DISPLAY_NAME, "Clamp to ground, Label, Semi-transparent, Audio icon");
+		    ppm.setLabelText(rssUnit.getEvent());
+		    ppm.setValue(AVKey.DISPLAY_NAME, rssUnit.getAreaDesc()+"\n"+rssUnit.getEffTime()+"\n"+"LinkText");
 		    ppm.setLineEnabled(false);
 		    ppm.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
 		   // pp.setEnableLabelPicking(true); // enable label picking for this placemark

@@ -29,7 +29,6 @@ public class R_Parser {
 	public void Parse(String areaCode){		
 
 			String html = request("http://alerts.weather.gov/cap/"+areaCode+".php?x=1");
-			//System.out.println(html);
 			Alert newAlert = new Alert();
 		    Plotter plotter = new Plotter();
 	//	    Position pos = new Position(null, null,0);
@@ -103,7 +102,7 @@ public class R_Parser {
 					
 
 					String []array = geoCode.split(" ");
-					for(int i=0; i<array.length ; i++){
+					for(int i=0; i<array.length; i++){
 						//System.out.println(array[i]);
 						//need to get the name for the county/zone
 						String result = request("http://alerts.weather.gov/cap/wwaatmget.php?x="+array[i]+"&y=1");
@@ -111,18 +110,19 @@ public class R_Parser {
 						Document doc_2 = dBuilder.parse(new InputSource(new ByteArrayInputStream(result.getBytes("utf-8"))));	
 						doc_2.getDocumentElement().normalize();
 						String areaTitle = doc_2.getElementsByTagName("title").item(0).getTextContent();
+						//System.out.println(areaTitle);
 						//fun with strings
 						String []titlePieces = areaTitle.split(array[i]);
-						titlePieces = titlePieces[0].split("for");
+						titlePieces = titlePieces[0].split(" for");
 						areaTitle = titlePieces[1].substring(1);
 						areaTitle = areaTitle.substring(0, (areaTitle.length()-2));
-					//	System.out.println(areaTitle);
+						//System.out.println(areaTitle);
 						String encoded = URLEncoder.encode(areaTitle, "UTF-8");
 					//	Strimg stateName =
 						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded+","+areaCode+",USA";
 						String googleResult = request(googleRequestUrl);
+						//System.out.println(encoded+","+areaCode+",USA");
 						//System.out.println(googleResult);
-					//	System.out.println(googleResult);
 						doc_2 = dBuilder.parse(new InputSource(new ByteArrayInputStream(googleResult.getBytes("utf-8"))));
 						doc_2.getDocumentElement().normalize();
 						if(doc_2.getElementsByTagName("lat").item(0)==null){

@@ -6,10 +6,6 @@ import java.util.Observer;
 
 import javax.swing.JTable;
 
-import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.layers.RenderableLayer;
-import package_1.ToolBar_Config_Settings.MyTableModel;
-
 public class Data_Manager implements Observer {
 	
 	final class Feed{
@@ -131,9 +127,11 @@ public class Data_Manager implements Observer {
 	
 	
 	public void addFeed (String areaCode){
-		//you need to pass in the parser that is referencing the WorldWindow
-		R_Parser parser = new R_Parser();
-		parser.Parse(areaCode);
+		RequestThread rt = new RequestThread();
+		rt.setAreaCode(areaCode);
+		rt.start();
+		System.out.println("oi");
+		return;
 	}
 	
 	private void Rerender(){
