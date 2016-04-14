@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
@@ -22,6 +23,8 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	public String RSS = "";
 	public boolean Add = false;
 	public boolean Remove = false;
+	static private ArrayList<String> RSS_Disabled_List = new ArrayList<String>();
+	static private ArrayList<String> RSS_Enabled_List = new ArrayList<String>();
 	
 	public ToolBar_AddRemove_RSS(){
 		windowOpen = false;
@@ -35,38 +38,136 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		windowOpen = false;
 	}
 	
-	private String GetCodeFromIndex(int arg){
-		
-		String Codes[] = {"us",
-		 "al", "ak", "as", "az",
-		 "ar", "ca", "co", "ct",
-		 "de", "dc", "fl", "ga",
-		 "gu", "hi", "id", "il",
-		 "in", "ia", "ks", "ky",
-		 "la", "me", "mp", "md",
-		 "ma", "mi", "um", "mn",
-		 "ms", "mo", "mt", "nv",
-		 "ne", "nh", "nj", "nm",
-		 "ny", "nc", "nd", "oh",
-		 "ok", "or", "pa", "pr",
-		 "ri", "sc", "sd", "tn",
-		 "tx", "ut", "vt", "vi",
-		 "va", "wa", "wv", "wi",
-		 "wy" };
-		
-		if((arg < 0) || (arg >= 58)){
-			return "";
-		}else{
-			return Codes[arg];
+	private String GetCodeFromName(String arg){
+		switch (arg){
+			case "All": 
+				return "us";
+			case "Alabama":
+				return "al";
+			case "Alaska":
+				return "ak";
+			case "America Samoa":
+				return "as";
+			case "Arizona":
+				return  "az";
+			case "Arkansas":
+				return "ar";
+			case  "California":
+				return "ca";
+			case "Colorado":
+				return "co";
+			case "Connecticut":
+				return "ct";
+			case "Delaware":
+				return "de";
+			case "District of Columbia":
+				return "dc";
+			case "Florida":
+				return "fl";
+			case "Georgia":
+				return "ga";
+			case "Guam":
+				return "gu";
+			case "Hawaii":
+				return "hi";
+			case "Idaho":
+				return "id";
+			case "Illinois":
+				return "il";
+			case "Indiana":
+				return "in";
+			case "Iowa":
+				return "ia";
+			case "Kansas":
+				return "ks";
+			case "Kentucky":
+				return "ky";
+			case  "Louisiana":
+				return "la";
+			case "Maine":
+				return "me";
+			case "Marianas":
+				return "mp";
+			case "Maryland":
+				return "md";
+			case  "Massachusetts":
+				return "ma";
+			case "Michigan":
+				return "mi";
+			case "Midway Island":
+				return "um";
+			case "Minnesota":
+				return "mn";
+			case "Mississippi":
+				return "ms";
+			case "Missouri":
+				return "mo";
+			case "Montana":
+				return "mt";
+			case "Nevada":
+				return "nv";
+			case "Nebraska":
+				return "ne";
+			case "New Hampshire":
+				return "nh";
+			case "New Jersey":
+				return "nj";
+			case "New Mexico":
+				return "nm";
+			case "New York":
+				return "ny";
+			case "North Carolina":
+				return "nc";
+			case "North Dakota":
+				return  "nd";
+			case "Ohio":
+				return "oh";
+			case "Oklahoma":
+				return "ok";
+			case "Oregon":
+				return "or";
+			case "Pennsylvania":
+				return "pa";
+			case "Puerto Rico":
+				return "pr";
+			case "Rhode Island":
+				return "ri";
+			case "South Carolina":
+				return "sc";
+			case "South Dakota":
+				return  "sd";
+			case  "Tennessee":
+				return  "tn";
+			case "Texas":
+				return "tx";
+			case "Utah":
+				return "ut";
+			case "Vermont":
+				return "vt";
+			case "Virgin Islands":
+				return "vi";
+			case "Virginia":
+				return "va";
+			case "Washington":
+				return"wa";
+			case  "West Virginia":
+				return "wv";
+			case "Wisconsin":
+				return "wi";
+			case "Wyoming":
+				return "wy";			
 		}
-		
+		return "";
 	}
 	
 	// Add the RSS feed to the data manager.
 	private void AddRSS(int index){
 		
-		String Code = GetCodeFromIndex(index);
-		
+		String Code = GetCodeFromName(RSS_Disabled_List.get(index));
+
+		RSS_Enabled_List.add(RSS_Disabled_List.get(index));
+		RSS_Disabled_List.remove(index);
+		RSS_Enabled_List.sort(String.CASE_INSENSITIVE_ORDER);
 		RSS = Code;
 		Add = true;
 		Remove = false;
@@ -79,8 +180,11 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	// Remove the RSS feed from the data manager.
 	private void RemoveRSS(int index){
 		
-		String Code = GetCodeFromIndex(index);
+		String Code = GetCodeFromName(RSS_Enabled_List.get(index));
 		
+		RSS_Disabled_List.add(RSS_Enabled_List.get(index));
+		RSS_Enabled_List.remove(index);
+		RSS_Disabled_List.sort(String.CASE_INSENSITIVE_ORDER);
 		RSS = Code;
 		Add = false;
 		Remove = true;
@@ -91,8 +195,8 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	}
 	
 	public void Create() {
-		
-			// Prevent multiple windows from being opened.
+	
+	// Prevent multiple windows from being opened.
 		if(windowOpen){ return; }
 		
 		JFrame frame = new JFrame("Add/Remove RSS Feeds");
@@ -108,13 +212,12 @@ public class ToolBar_AddRemove_RSS extends Observable {
         JPanel CS_Panel = new JPanel(new GridLayout(0, 1, 0, 0));
         CS_Panel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
           
-		
 		String[] RSS_List = {  
 		 "All", "Alabama", "Alaska",
 		 "America Samoa", "Arizona", "Arkansas",
 		 "California", "Colorado", "Connecticut",
 		 "Delaware", "District of Columbia", "Florida",
-		 "Georgia", "Guam", "Hawaii ", "Idaho", 
+		 "Georgia", "Guam", "Hawaii", "Idaho", 
 		 "Illinois", "Indiana", "Iowa",
 		 "Kansas", "Kentucky", "Louisiana",
 		 "Maine", "Marianas", "Maryland",
@@ -129,10 +232,15 @@ public class ToolBar_AddRemove_RSS extends Observable {
 		 "Texas", "Utah", "Vermont", "Virgin Islands",
 		 "Virginia", "Washington", "West Virginia",
 		 "Wisconsin", "Wyoming"};
+			
+		if(RSS_Disabled_List.size()==0){
+			for(int i=0; i<RSS_List.length; i++){
+				RSS_Disabled_List.add(RSS_List[i]);
+			}
+		}
 		
-		
-		JComboBox Select_Add = new JComboBox(RSS_List);
-		JComboBox Select_Remove = new JComboBox(RSS_List);
+		JComboBox Select_Add = new JComboBox(RSS_Disabled_List.toArray());
+		JComboBox Select_Remove = new JComboBox(RSS_Enabled_List.toArray());
 		
 		CS_Panel.add(Select_Add);
 		

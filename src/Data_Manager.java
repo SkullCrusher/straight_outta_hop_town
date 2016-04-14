@@ -10,13 +10,13 @@ public class Data_Manager implements Observer {
 	
 	final class Feed{
 		String RSS_FEED = ""; // This is the state code not the state name.
-		int Refresh_Delay = 5000;
+		int Refresh_Delay = 300000;
 		boolean Enabled = true;
 	}
 	
 		// A container for all of the feeds that have been added to the map.
-	public static ArrayList<Feed> RSS_FEEDS = new ArrayList();
-	
+	public static ArrayList<Feed> RSS_FEEDS = new ArrayList<Feed>();
+	public static ArrayList<RefreshThread> REF_THREADS = new ArrayList<RefreshThread>();
 		// This takes a full name of the RSS feed and returns the state code.
 	public String StateToStateCode(String arg){
 					
@@ -122,29 +122,39 @@ public class Data_Manager implements Observer {
 				// Fail safe.
 		return "NULL";
 	}
-	
-	
-	
-	
-	public void addFeed (String areaCode){
-		RequestThread rt = new RequestThread();
-		rt.setAreaCode(areaCode);
-		rt.start();
-		System.out.println("oi");
-		return;
-	}
-	
+		
 	private void Rerender(){
 		Plotter plotter = new Plotter();
 	    plotter.clearMap();
 		
-		R_Parser parser = new R_Parser();
-		
-		for(int i = 0; i < RSS_FEEDS.size(); i++){			
-			parser.Parse(RSS_FEEDS.get(i).RSS_FEED);		
+		for(int i = 0; i < RSS_FEEDS.size(); i++){	
+			if(RSS_FEEDS.get(i).Enabled==true){
+				RequestThread rt = new RequestThread();
+				rt.setAreaCode(RSS_FEEDS.get(i).RSS_FEED);
+				rt.start();//thread to load the data initially
+				RefreshThread refT = new RefreshThread();
+				refT.setThreadName(RSS_FEEDS.get(i).RSS_FEED);
+				refT.setSleepTime(RSS_FEEDS.get(i).Refresh_Delay);
+				refT.start();//thread to keep refreshing the data
+				//only one refresh thread per rss feed
+				removeIfExists(REF_THREADS, RSS_FEEDS.get(i).RSS_FEED);
+				REF_THREADS.add(refT);
+			}
 		}
 	}
 
+	public static void removeIfExists(ArrayList<RefreshThread> refList, String name){
+		for (int i=0; i<refList.size(); i++){
+			if(refList.get(i).getThreadName().equals(name)){
+				System.out.println("interrupted?");
+				refList.get(i).interrupt();
+				refList.get(i).setRunning(false);//kind of a hack, but interrupt wasn't working for me	
+				refList.remove(refList.indexOf(refList.get(i)));
+				return;
+			}
+		}
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
@@ -165,13 +175,13 @@ public class Data_Manager implements Observer {
 				if(temp.Remove == true){
 					
 						// This does not work for some reason.... maybe Jordan will know why.
+						// Jordan thinks this works
 					for(int i = 0; i < RSS_FEEDS.size(); i++){						
 						if(RSS_FEEDS.get(i).RSS_FEED.equals((String) temp.RSS)){
 							RSS_FEEDS.remove(i);
 						}
 					}	
 				}
-				
 				Rerender();
 			}
 		}

@@ -33,7 +33,7 @@ public class ToolBar_Config_Settings extends Observable {
 				// Set the column names.			
 			columnNames.add(new String("Feed name"));
 			columnNames.add(new String("Refresh time"));
-			columnNames.add(new String("Enabled"));
+			columnNames.add(new String("Display"));
 			
 				// Load in the currently added RSS feeds.			
 			Data_Manager temp = new Data_Manager();
