@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class Data_Manager implements Observer {
 	
@@ -155,6 +157,17 @@ public class Data_Manager implements Observer {
 		}
 	}
 	
+		// This resets the search settings.
+	private void Search_Reset(){
+		
+		System.out.println("hjk");
+	}
+		// Sorry Jordan, I don't know what the warning levels are so they are just check1-5
+	private void Search_Set(String State, String City, boolean WarningType1, boolean WarningType2, boolean WarningType3, boolean WarningType4, boolean WarningType5){
+
+		System.out.println(State);
+	}
+	
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		
@@ -229,9 +242,29 @@ public class Data_Manager implements Observer {
 		if( arg1 instanceof ToolBar_Search_Button){
 			
 				// This is the area code or w.e.
-			ToolBar_Search_Button temp = (ToolBar_Search_Button) arg1;			
+			ToolBar_Search_Button temp = (ToolBar_Search_Button) arg1;	
+			
+				// Check if the user clicked the search or reset.
+			if(temp.Reset){
+				// Reset the search.
+				 Search_Reset();				
+			}else{
+				
+				String textField1 = temp.textField1.getText(); // State
+				String textField2 = temp.textField2.getText(); // City
+				 
+				boolean check1 = temp.check1.isSelected();
+				boolean check2 = temp.check2.isSelected();
+				boolean check3 = temp.check3.isSelected();
+				boolean check4 = temp.check4.isSelected();
+				boolean check5 = temp.check5.isSelected();
+				
+				Search_Set(textField1, textField2, check1, check2, check3, check4, check5);				
+			}
 			
 		}
+		
+	
 		
 		
 	}
