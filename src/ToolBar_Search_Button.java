@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
@@ -17,7 +19,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.border.Border;
 
 public class ToolBar_Search_Button extends Observable {
@@ -27,12 +31,24 @@ public class ToolBar_Search_Button extends Observable {
 	
 	public JTextField textField1; // State
 	public JTextField textField2; // City
-	 
-	public JCheckBox check1;
-	public JCheckBox check2;
-	public JCheckBox check3;
-	public JCheckBox check4;
-	public JCheckBox check5;
+	
+		// Before DateTime
+	JSpinner BeforeDateTime;
+		// After DateTime
+	JSpinner AfterDateTime;
+	 	
+	public JCheckBox Severity_Severe;
+	public JCheckBox Severity_Moderate;
+	public JCheckBox Severity_Minor;
+	public JCheckBox Severity_Unknown;
+	
+	public JCheckBox Urgency_Expected;
+	public JCheckBox Urgency_Future;
+	public JCheckBox Urgency_Immediate;
+	public JCheckBox Urgency_Unknown;
+	
+
+	
 
 
 	
@@ -87,8 +103,7 @@ public class ToolBar_Search_Button extends Observable {
 		JComboBox Select_Add = new JComboBox();
 		JComboBox Select_Remove = new JComboBox();
 		
-		
-		
+			
 		
 		//CS_Panel.add(Select_Add);
 		
@@ -121,23 +136,84 @@ public class ToolBar_Search_Button extends Observable {
 		 
 		JLabel label2 = new JLabel("State");
 		JLabel label3 = new JLabel("City");
+		
+		
+		Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 12); 
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        SpinnerDateModel model2 = new SpinnerDateModel();
+        model2.setValue(calendar.getTime());
+
+        BeforeDateTime = new JSpinner(model2);
+		
+
+		Calendar calendar2 = Calendar.getInstance();
+        calendar2.set(Calendar.HOUR_OF_DAY, 12);
+        calendar2.set(Calendar.MINUTE, 0);
+        calendar2.set(Calendar.SECOND, 0);
+
+        SpinnerDateModel model3 = new SpinnerDateModel();
+        model3.setValue(calendar2.getTime());
+
+        AfterDateTime = new JSpinner(model3);
+		
+      
+		
+		JLabel label4 = new JLabel("Start Date/Time");
+		JLabel label5 = new JLabel("End Date/Time");
+		
+		CS_Panel.add(label4);
+		CS_Panel.add(BeforeDateTime);
+		CS_Panel.add(label5);
+		CS_Panel.add(AfterDateTime);
+		
+		
+		
 	
 		CS_Panel.add(label2);
 		CS_Panel.add(textField1);
 		CS_Panel.add(label3);
 		CS_Panel.add(textField2);
-		 
-		check1 = new JCheckBox("Expected");
-		CS_Panel.add(check1);
-		check2 = new JCheckBox("Immediate");
-		CS_Panel.add(check2);
-		check3 = new JCheckBox("Type 3");
-		CS_Panel.add(check3);
-		check4 = new JCheckBox("Type 4");
-		CS_Panel.add(check4);
-		check5 = new JCheckBox("Type 5");
-		CS_Panel.add(check5);
-		 
+		
+
+		
+	
+
+		SpinnerDateModel model = new SpinnerDateModel();
+		model.setValue(calendar.getTime());
+
+		JSpinner spinner = new JSpinner(model);
+		
+
+		
+			// Severity.	
+		JLabel label9 = new JLabel("Severity");
+		CS_Panel.add(label9);
+		
+		Severity_Severe = new JCheckBox("Severe");
+		CS_Panel.add(Severity_Severe);
+		Severity_Moderate = new JCheckBox("Moderate");
+		CS_Panel.add(Severity_Moderate);
+		Severity_Minor = new JCheckBox("Minor");
+		CS_Panel.add(Severity_Minor);
+		Severity_Unknown = new JCheckBox("Unknown");
+		CS_Panel.add(Severity_Unknown);
+		
+			// Urgency
+		JLabel label10 = new JLabel("Urgency");
+		CS_Panel.add(label10);
+		
+		Urgency_Expected = new JCheckBox("Expected");
+		CS_Panel.add(Urgency_Expected);
+		Urgency_Future = new JCheckBox("Future");
+		CS_Panel.add(Urgency_Future);
+		Urgency_Immediate = new JCheckBox("Immediate");
+		CS_Panel.add(Urgency_Immediate);
+		Urgency_Unknown = new JCheckBox("Unknown");
+		CS_Panel.add(Urgency_Unknown);
+		
 		controls.add(CS_Panel);
 		
 
@@ -162,7 +238,7 @@ public class ToolBar_Search_Button extends Observable {
 		});
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		frame.setSize(300,400);
+		frame.setSize(300,600);
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width / 2 - frame.getSize().width/2, dim.height/2-frame.getSize().height/2);

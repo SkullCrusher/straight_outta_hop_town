@@ -1,10 +1,12 @@
 package package_1;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JCheckBox;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -162,8 +164,8 @@ public class Data_Manager implements Observer {
 		
 		System.out.println("hjk");
 	}
-		// Sorry Jordan, I don't know what the warning levels are so they are just check1-5
-	private void Search_Set(String State, String City, boolean WarningType1, boolean WarningType2, boolean WarningType3, boolean WarningType4, boolean WarningType5){
+		// Search settings.
+	private void Search_Set(String State, String City, String BeforeDateTime , String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
 
 		System.out.println(State);
 	}
@@ -253,13 +255,25 @@ public class Data_Manager implements Observer {
 				String textField1 = temp.textField1.getText(); // State
 				String textField2 = temp.textField2.getText(); // City
 				 
-				boolean check1 = temp.check1.isSelected();
-				boolean check2 = temp.check2.isSelected();
-				boolean check3 = temp.check3.isSelected();
-				boolean check4 = temp.check4.isSelected();
-				boolean check5 = temp.check5.isSelected();
+							
+				boolean Severity_Severe = temp.Severity_Severe.isSelected();
+				boolean Severity_Moderate = temp.Severity_Moderate.isSelected();
+				boolean Severity_Minor = temp.Severity_Minor.isSelected();
+				boolean Severity_Unknown = temp.Severity_Unknown.isSelected();
 				
-				Search_Set(textField1, textField2, check1, check2, check3, check4, check5);				
+				boolean Urgency_Expected = temp.Urgency_Expected.isSelected();
+				boolean Urgency_Future = temp.Urgency_Future.isSelected();
+				boolean Urgency_Immediate = temp.Urgency_Immediate.isSelected();
+				boolean Urgency_Unknown = temp.Urgency_Unknown.isSelected();
+				
+				Object AfterDateTime = temp.AfterDateTime.getValue();
+				Object BeforeDateTime = temp.AfterDateTime.getValue();
+				
+				String After = AfterDateTime.toString();
+				String Before = BeforeDateTime.toString();
+					
+				
+				Search_Set(textField1, textField2, Before, After, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);				
 			}
 			
 		}
