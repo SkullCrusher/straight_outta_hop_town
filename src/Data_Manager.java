@@ -21,6 +21,15 @@ public class Data_Manager implements Observer {
 		// A container for all of the feeds that have been added to the map.
 	public static ArrayList<Feed> RSS_FEEDS = new ArrayList<Feed>();
 	public static ArrayList<RefreshThread> REF_THREADS = new ArrayList<RefreshThread>();
+	
+	public static ArrayList<Feed> DumpFeeds(){
+		return RSS_FEEDS;
+	}
+	
+	public static void SetFeeds(ArrayList<Feed> arg){
+		RSS_FEEDS = arg;
+	}
+	
 		// This takes a full name of the RSS feed and returns the state code.
 	public String StateToStateCode(String arg){
 					
@@ -274,8 +283,7 @@ public class Data_Manager implements Observer {
 					
 				
 				Search_Set(textField1, textField2, Before, After, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);				
-			}
-			
+			}			
 		}
 		
 	
