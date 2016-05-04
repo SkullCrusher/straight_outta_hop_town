@@ -30,10 +30,9 @@ public class FileIO {
 				}
 				fileReader.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				return;
 			}
-		      
-	      	// There needs to be linecount * 2 lines, return the file because it's invalid.
+
 	      if(Lines.size() % 2 != 0){
 	    	  return;
 	      }
@@ -51,8 +50,6 @@ public class FileIO {
 	    	  }
 	    	  	    	  
 	    	  arg.AddRSSFeedFromFile(RSS_FEED, Refresh_Delay);
-	  		  
-	  		  System.out.println(RSS_FEED + " : " + Refresh_Delay);
 	      }	   
 	      
 		return;
@@ -67,10 +64,8 @@ public class FileIO {
 		try {
 			writer = new PrintWriter(current + "\\User_Configuration.txt", "UTF-8");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			return;
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
 			return;
 		}
 		
