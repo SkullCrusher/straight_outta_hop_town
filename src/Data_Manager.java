@@ -22,18 +22,37 @@ public class Data_Manager implements Observer {
 	public static ArrayList<Feed> RSS_FEEDS = new ArrayList<Feed>();
 	public static ArrayList<RefreshThread> REF_THREADS = new ArrayList<RefreshThread>();
 	
-	public static ArrayList<Feed> DumpFeeds(){
-		return RSS_FEEDS;
+	public static int GetRSSSize(){
+		return RSS_FEEDS.size();
+	}
+	
+		// Gets the delay of a RSS_Feed.
+	public static String GetString(int index){
+		return RSS_FEEDS.get(index).RSS_FEED;
+	}
+	
+		// Gets the delay of a index.
+	public static int GetDelay(int index){
+		return RSS_FEEDS.get(index).Refresh_Delay;
+	}
+	
+	
+		// Allows outside feeds to be added.
+	public void AddRSSFeedFromFile(String name, int delay){
+		Feed Temp = new Feed();
+		
+		
+		Temp.Refresh_Delay = delay;
+		Temp.RSS_FEED = name;
+		Temp.Enabled = true;
+		
+		RSS_FEEDS.add(Temp);
 	}
 	
 	Data_Manager(){
 		plotter = new Plotter();
 	}
-	
-	public static void SetFeeds(ArrayList<Feed> arg){
-		RSS_FEEDS = arg;
-	}
-	
+
 		// This takes a full name of the RSS feed and returns the state code.
 	public String StateToStateCode(String arg){
 					
@@ -140,11 +159,16 @@ public class Data_Manager implements Observer {
 		return "NULL";
 	}
 		
-	private void Rerender(){
+	public void Rerender(){
 	//	Plotter plotter = new Plotter();
 	    plotter.clearMap();
 		
 		for(int i = 0; i < RSS_FEEDS.size(); i++){	
+			
+			if(RSS_FEEDS.get(i) == null){
+				continue;
+			}
+			
 			if(RSS_FEEDS.get(i).Enabled==true){
 				RequestThread rt = new RequestThread();
 				rt.setAreaCode(RSS_FEEDS.get(i).RSS_FEED);
@@ -242,7 +266,7 @@ public class Data_Manager implements Observer {
 						RSS_FEEDS.get(g).Refresh_Delay = Refresh_Time;
 						
 							// Debugging.
-						System.out.println(RSS_Name + " " + RSS_FEEDS.get(g).Refresh_Delay + " " + RSS_FEEDS.get(g).Enabled);
+						//System.out.println(RSS_Name + " " + RSS_FEEDS.get(g).Refresh_Delay + " " + RSS_FEEDS.get(g).Enabled);
 						
 						break;
 					}
