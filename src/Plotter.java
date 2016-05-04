@@ -11,15 +11,36 @@ import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
 
 public class Plotter {
+	public class Filters{
+		String State;
+		String City;
+		String BeforeDateTime;
+		String AfterDateTime;
+		boolean Severity_Severe; 
+		boolean Severity_Moderate;
+		boolean Severity_Minor;
+		boolean Severity_Unknown;
+		boolean Urgency_Expected;
+		boolean Urgency_Future;
+		boolean Urgency_Immediate;
+		boolean Urgency_Unknown;
+	}
 	private static WorldWindow ww;
 	private static RenderableLayer layer; 
+	private Filters filterParams;
+	
 	
 	public void plot(Alert rssUnit){
 		//	PointPlacemark ppm = new PointPlacemark(rssUnit.getPosition());
 		Position pos;
+		if(!applyFilters(rssUnit)){
+			System.out.println("No plot");
+			return;//no plot
+		}
 		PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
 		PointPlacemark ppm;
 		for(int i=0; i<rssUnit.getPosCount();i++){	
+            
 			pos = rssUnit.getPosition(i);
 			ppm = new PointPlacemark(pos);
 		   
@@ -28,11 +49,7 @@ public class Plotter {
 		    ppm.setValue(AVKey.DISPLAY_NAME, rssUnit.getAreaDesc()+"\n"+rssUnit.getEffTime()+"\n"+"LinkText");
 		    ppm.setLineEnabled(false);
 		    ppm.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
-		   // pp.setEnableLabelPicking(true); // enable label picking for this placemark
-	//	    attrs.setImageAddress("gov/nasa/worldwindx/examples/images/audioicon-64.png");
-	//	    attrs.setImageColor(new Color(1f, 1f, 1f, 0.6f));
 		    attrs.setScale(0.6);
-//		    attrs.setImageOffset(new Offset(19d, 8d, AVKey.PIXELS, AVKey.PIXELS));
 		    attrs.setLabelOffset(new Offset(0.9d, 0.6d, AVKey.FRACTION, AVKey.FRACTION));
 		    ppm.setAttributes(attrs);
 		    layer.addRenderable(ppm);
@@ -60,5 +77,85 @@ public class Plotter {
 
 	public static void setWw(WorldWindow ww) {
 		Plotter.ww = ww;
+	}
+	Plotter(){
+		filterParams = new Filters();
+		setFilterParams("","","","", false,false,false,false,false,false,false,false);
+	}
+	
+	
+	public void setFilterParams(String State, String City, String BeforeDateTime ,
+			                       String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, 
+			                        boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, 
+			                        boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
+		filterParams.State = State;
+		filterParams.City = City;
+		filterParams.BeforeDateTime = BeforeDateTime;
+		filterParams.AfterDateTime = AfterDateTime;
+		filterParams.Severity_Severe = Severity_Severe;
+		if(Severity_Severe){
+			System.out.println("oi got me anotha one ser");
+		}
+		filterParams.Severity_Moderate = Severity_Moderate;
+		filterParams.Severity_Minor = Severity_Minor;
+		filterParams.Severity_Unknown = Severity_Unknown;
+		filterParams.Urgency_Expected = Urgency_Expected;
+		filterParams.Urgency_Future = Urgency_Future;
+		filterParams.Urgency_Immediate = Urgency_Immediate;
+		filterParams.Urgency_Unknown = Urgency_Unknown;
+	}
+	
+	public Boolean applyFilters(Alert rssUnit){
+		System.out.println(rssUnit.getSeverity()+"-");
+		if(filterParams.Severity_Severe){
+			System.out.println("OI! he appears to still be with us cap'n!");
+		}
+		switch(rssUnit.getSeverity()){
+			case "Unknown":
+				if(filterParams.Severity_Unknown){
+					return false;
+				}
+				break;
+			case "Minor":
+				if(filterParams.Severity_Minor){
+					return false;
+				}
+				break;
+			case "Moderate":
+				if(filterParams.Severity_Moderate){
+					return false;
+				}
+				break;
+			case "Severe":
+				if(filterParams.Severity_Severe){
+					return false;
+				}
+				break;
+			default:
+				return false;
+		}
+		switch(rssUnit.getUrgency()){
+			case "Expected":
+				if(filterParams.Urgency_Expected){
+					return false;
+				}
+				break;
+			case "Future":
+				if(filterParams.Urgency_Future){
+					return false;
+				}
+				break;
+			case "Immediate":
+				if(filterParams.Urgency_Immediate){
+					return false;
+				}
+				break;
+			case "Unknown":
+				if(filterParams.Urgency_Unknown){
+					return false;
+				}
+		}
+
+		return true;
 	}
 }

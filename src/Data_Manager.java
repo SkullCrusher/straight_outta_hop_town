@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class Data_Manager implements Observer {
-	
+	private Plotter plotter;
 	final class Feed{
 		String RSS_FEED = ""; // This is the state code not the state name.
 		int Refresh_Delay = 300000;
@@ -24,6 +24,10 @@ public class Data_Manager implements Observer {
 	
 	public static ArrayList<Feed> DumpFeeds(){
 		return RSS_FEEDS;
+	}
+	
+	Data_Manager(){
+		plotter = new Plotter();
 	}
 	
 	public static void SetFeeds(ArrayList<Feed> arg){
@@ -137,7 +141,7 @@ public class Data_Manager implements Observer {
 	}
 		
 	private void Rerender(){
-		Plotter plotter = new Plotter();
+	//	Plotter plotter = new Plotter();
 	    plotter.clearMap();
 		
 		for(int i = 0; i < RSS_FEEDS.size(); i++){	
@@ -175,8 +179,8 @@ public class Data_Manager implements Observer {
 	}
 		// Search settings.
 	private void Search_Set(String State, String City, String BeforeDateTime , String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
-
-		System.out.println(State);
+		plotter.setFilterParams(State, City, BeforeDateTime, AfterDateTime, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);
+		Rerender();
 	}
 	
 	@Override
@@ -261,11 +265,14 @@ public class Data_Manager implements Observer {
 				 Search_Reset();				
 			}else{
 				
-				String textField1 = temp.textField1.getText(); // State
-				String textField2 = temp.textField2.getText(); // City
+				String State = temp.textField1.getText(); // State
+				String City = temp.textField2.getText(); // City
 				 
 							
 				boolean Severity_Severe = temp.Severity_Severe.isSelected();
+				if(Severity_Severe){
+					System.out.println("got me one ser");
+				}
 				boolean Severity_Moderate = temp.Severity_Moderate.isSelected();
 				boolean Severity_Minor = temp.Severity_Minor.isSelected();
 				boolean Severity_Unknown = temp.Severity_Unknown.isSelected();
@@ -282,7 +289,7 @@ public class Data_Manager implements Observer {
 				String Before = BeforeDateTime.toString();
 					
 				
-				Search_Set(textField1, textField2, Before, After, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);				
+				Search_Set(State, City, Before, After, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);				
 			}			
 		}
 		

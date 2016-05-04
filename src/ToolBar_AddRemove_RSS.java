@@ -40,8 +40,6 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	
 	private String GetCodeFromName(String arg){
 		switch (arg){
-			case "All": 
-				return "us";
 			case "Alabama":
 				return "al";
 			case "Alaska":
@@ -213,7 +211,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
         CS_Panel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
           
 		String[] RSS_List = {  
-		 "All", "Alabama", "Alaska",
+		 "Alabama", "Alaska",
 		 "America Samoa", "Arizona", "Arkansas",
 		 "California", "Colorado", "Connecticut",
 		 "Delaware", "District of Columbia", "Florida",
