@@ -17,8 +17,8 @@ public class FileIO {
 		        
 		   String value; 
 		   while ((value = in.read()) != -1) {
-		             
-		         }
+			   
+		   }
 		     
 		         
 		         if (in != null) {
