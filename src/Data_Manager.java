@@ -2,6 +2,7 @@ package package_1;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -210,12 +211,77 @@ public class Data_Manager implements Observer {
 	}
 		// Search settings.
 	
-	private void convertDates(String datetime){
+	private String convertDates(String datetime){
+		System.out.println(datetime);
+		String[] tmp = datetime.split(" ");
+
+		switch(tmp[1]){
+		case "January":
+			tmp[1] = "1";
+			break;
+		case "February":
+			tmp[1] ="2";
+			break;
+		case "March":
+			tmp[1] = "3";
+			break;
+		case "April":
+			tmp[1] = "4";
+			break;
+		case "May":
+			tmp[1] = "5";
+			break;
+		case "June":
+			tmp[1] ="6";
+			break;
+		case "July":
+			tmp[1] ="7";
+			break;
+		case "August":
+			tmp[1] = "8";
+			break;
+		case "September":
+			tmp[1] = "9";
+			break;
+		case "October":
+			tmp[1] = "10";
+			break;
+		case "November":
+			tmp[1] = "11";
+			break;
+		case "December":
+			tmp[1] = "12";
+			break;
+		}
+		String date;
+		String Month = tmp[1];
+		String Day = tmp[2];
+		String Year = tmp[5];
+		String time = tmp[3];
+		String ampm;
+		String [] hms = time.split(":");
+	    Integer h = Integer.parseInt(hms[0]);
+	    if(h>12){
+	    	h = h-12;
+	    	ampm = "PM";
+	    } else {
+	    	ampm = "AM";
+	    }
+	    time = h.toString()+":"+hms[1]+" "+ampm;
+		Year.replace("20", "");
+		if(Day.startsWith("0")){
+			Day = Day.substring(1, 2);
+		}
+		date =Day+"/"+Month+"/"+Year+" ";
+		datetime = date+time;
 		
+		
+		return datetime;
 	}
 	
 	private void Search_Set(String State, String City, String BeforeDateTime , String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
-		convertDates(BeforeDateTime);
+		BeforeDateTime = convertDates(BeforeDateTime);
+		AfterDateTime = convertDates(AfterDateTime);	
 		plotter.setFilterParams(BeforeDateTime, AfterDateTime, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);
 //		if(!State.isEmpty()||!City.isEmpty()){
 //			makeCustomRequst(State, City);
@@ -310,7 +376,7 @@ public class Data_Manager implements Observer {
 				String State = temp.textField1.getText(); // State
 				String City = temp.textField2.getText(); // City
 				 
-							
+
 				boolean Severity_Severe = temp.Severity_Severe.isSelected();
 				boolean Severity_Moderate = temp.Severity_Moderate.isSelected();
 				boolean Severity_Minor = temp.Severity_Minor.isSelected();
@@ -321,9 +387,9 @@ public class Data_Manager implements Observer {
 				boolean Urgency_Immediate = temp.Urgency_Immediate.isSelected();
 				boolean Urgency_Unknown = temp.Urgency_Unknown.isSelected();
 				
-				Object AfterDateTime = temp.AfterDateTime.getValue();
-				Object BeforeDateTime = temp.AfterDateTime.getValue();
-				
+				Date AfterDateTime = (Date)temp.AfterDateTime.getValue();
+				Date BeforeDateTime = (Date)temp.AfterDateTime.getValue();
+
 				String After = AfterDateTime.toString();
 				String Before = BeforeDateTime.toString();
 					

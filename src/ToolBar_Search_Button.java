@@ -46,7 +46,6 @@ public class ToolBar_Search_Button extends Observable {
 	public JCheckBox Urgency_Future;
 	public JCheckBox Urgency_Immediate;
 	public JCheckBox Urgency_Unknown;
-	
 
 	
 
