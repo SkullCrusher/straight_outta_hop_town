@@ -20,7 +20,7 @@ public class RefreshThread extends Thread{
 				throw new InterruptedException();
 			}
 			if(running){
-				Thread.sleep(this.sleepTime*60*100);//this way sleep time setting is like number of minutes
+				Thread.sleep(this.sleepTime*60*1000);//this way sleep time setting is like number of minutes
 		//		System.out.println("refreshing--"+this.threadName+"--"+this.sleepTime);
 					if(running){
 				parser.Parse(this.threadName);//thread named after area code

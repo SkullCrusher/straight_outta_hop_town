@@ -189,6 +189,8 @@ public class Data_Manager implements Observer {
 			}
 		}
 	}
+	
+	public void makeCustomRequst(String city, String state ){}
 
 	public static void removeIfExists(ArrayList<RefreshThread> refList, String name){
 		for (int i=0; i<refList.size(); i++){
@@ -207,8 +209,17 @@ public class Data_Manager implements Observer {
 		//System.out.println("hjk");
 	}
 		// Search settings.
+	
+	private void convertDates(String datetime){
+		
+	}
+	
 	private void Search_Set(String State, String City, String BeforeDateTime , String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
+		convertDates(BeforeDateTime);
 		plotter.setFilterParams(BeforeDateTime, AfterDateTime, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);
+//		if(!State.isEmpty()||!City.isEmpty()){
+//			makeCustomRequst(State, City);
+//		}
 		Rerender();
 	}
 	

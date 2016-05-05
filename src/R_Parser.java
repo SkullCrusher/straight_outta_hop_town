@@ -138,6 +138,7 @@ public class R_Parser {
 					//	Angle lat_a = new Angle();
 						Position pos = new Position(Angle.fromDegrees(lat), Angle.fromDegrees(lng), 0);
 						newAlert.pushPosition(pos);
+						break;
 					}
 					plotter.plot(newAlert);
 				}
