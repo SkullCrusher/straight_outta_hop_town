@@ -156,11 +156,9 @@ public class Plotter {
 	//		System.out.println(filterParams.BeforeDateTime+" "+filterParams.AfterDateTime);
 			if(!filterParams.BeforeDateTime.isEmpty()||!filterParams.AfterDateTime.isEmpty()){
 				if((rssUnit.getExpTime().compareTo(filterParams.BeforeDateTime))<=0){
-					System.out.println("Too early");
 					return false;
 				}
 				if((rssUnit.getEffTime().compareTo(filterParams.AfterDateTime))>=0){
-					System.out.println("Too late");
 					return false;
 				}
 			}

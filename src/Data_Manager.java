@@ -175,7 +175,7 @@ public class Data_Manager implements Observer {
 			if(RSS_FEEDS.get(i) == null){
 				continue;
 			}
-			System.out.println(RSS_FEEDS.get(i).RSS_FEED);
+		//	System.out.println(RSS_FEEDS.get(i).RSS_FEED);
 			if(RSS_FEEDS.get(i).Enabled==true){
 				RequestThread rt = new RequestThread();
 				rt.setAreaCode(RSS_FEEDS.get(i).RSS_FEED);
@@ -207,6 +207,7 @@ public class Data_Manager implements Observer {
 		// This resets the search settings.
 	private void Search_Reset(){
 		plotter.resetFilters();
+		Rerender();
 		//System.out.println("hjk");
 	}
 		// Search settings.
