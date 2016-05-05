@@ -49,13 +49,30 @@ public class Plotter {
 		BlackList.add(arg);
 	}
 	
-	public static void CallURL(String arg){
+	public static synchronized void  CallURL(String arg){
 		if(!Plotter.IsBlacklist(arg)){
       	  
-	  		  Plotter.AddBlacklist(arg);
-	        
+	  		  Plotter.AddBlacklist(arg);	        
 	  	  
 	  		  System.out.println(arg );
+	  		  
+	  	     
+	  	      
+	  	    (new Thread() {
+	  	      public void run() {
+	  	    	 try {
+	                  Thread.sleep(3000);                 //1000 milliseconds is one second.
+	              } catch(InterruptedException ex) {
+	                  Thread.currentThread().interrupt();
+	              }
+	  	    	 
+	  	    	 BlackList.clear();	  	    	 
+	  	      }
+	  	     }).start();
+	  	      
+	  	      
+	  		  
+	  		  
 	    
 	   		try {
 	   			Desktop.getDesktop().browse(new URL(arg).toURI());
