@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import gov.nasa.worldwind.WorldWind;
@@ -171,6 +172,7 @@ public class Plotter {
 	Plotter(){
 		filterParams = new Filters();
 		setFilterParams("","", false,false,false,false,false,false,false,false);
+		BlackList = new ArrayList<String>();
 	}
 	
 	public void resetFilters(){

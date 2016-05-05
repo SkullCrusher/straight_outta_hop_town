@@ -213,7 +213,7 @@ public class Data_Manager implements Observer {
 		// Search settings.
 	
 	private String convertDates(String datetime){
-		System.out.println(datetime);
+		//System.out.println(datetime);
 		String[] tmp = datetime.split(" ");
 
 		switch(tmp[1]){
