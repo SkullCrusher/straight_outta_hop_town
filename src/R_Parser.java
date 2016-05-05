@@ -124,7 +124,7 @@ public class R_Parser {
 						//System.out.println(areaTitle);
 						String encoded = URLEncoder.encode(areaTitle, "UTF-8");
 					//	Strimg stateName =
-						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?key=AIzaSyCbhk5ZMiuN_v3amD8t8vrB6FVvuqkhaIU&address="+encoded+","+areaCode+",USA";
+						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?key=AIzaSyDsrwmzS3kqqbppw0GjXDV1yPVhC-1TK84&address="+encoded+","+areaCode+",USA";
 						String googleResult = request(googleRequestUrl);
 						//System.out.println(encoded+","+areaCode+",USA");
 						//System.out.println(googleResult);

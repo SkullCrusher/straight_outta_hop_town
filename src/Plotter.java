@@ -1,10 +1,19 @@
 package package_1;
 
+import java.awt.Desktop;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.List;
+
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.event.SelectEvent;
+import gov.nasa.worldwind.event.SelectListener;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.RenderableLayer;
+import gov.nasa.worldwind.pick.PickedObject;
 import gov.nasa.worldwind.render.Offset;
 import gov.nasa.worldwind.render.PointPlacemark;
 import gov.nasa.worldwind.render.PointPlacemarkAttributes;
@@ -29,6 +38,51 @@ public class Plotter {
 	private static RenderableLayer layer; 
 	private Filters filterParams;
 	
+	public static List<String> BlackList;
+	
+	public static boolean IsBlacklist(String arg){
+		return BlackList.contains(arg);
+	}
+	
+	public static void AddBlacklist(String arg){
+		BlackList.add(arg);
+	}
+	
+	public static void CallURL(String arg){
+		if(!Plotter.IsBlacklist(arg)){
+      	  
+	  		  Plotter.AddBlacklist(arg);
+	        
+	  	  
+	  		  System.out.println(arg );
+	    
+	   		try {
+	   			Desktop.getDesktop().browse(new URL(arg).toURI());
+	   		} catch (Exception e) {}
+   		
+  	  
+    	}
+	}
+	
+	public static void openWebpage(URI uri) {
+	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(uri);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public static void openWebpage(URL url) {
+	    try {
+	        openWebpage(url.toURI());
+	    } catch (URISyntaxException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	
 	public void plot(Alert rssUnit){
 		//	PointPlacemark ppm = new PointPlacemark(rssUnit.getPosition());
@@ -46,7 +100,7 @@ public class Plotter {
 		   
 		    
 		    ppm.setLabelText(rssUnit.getEvent());
-		    ppm.setValue(AVKey.DISPLAY_NAME, rssUnit.getAreaDesc()+"\n"+rssUnit.getEffTime()+"\n"+"LinkText");
+		    ppm.setValue(AVKey.DISPLAY_NAME, "Area: " + rssUnit.getAreaDesc()+"\nTime: "+rssUnit.getEffTime()+"\nLink: "+rssUnit.getLinkUrl());
 		    ppm.setLineEnabled(false);
 		    ppm.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);
 		    attrs.setScale(0.6);
@@ -55,7 +109,43 @@ public class Plotter {
 		    layer.addRenderable(ppm);
 		   
 		    ApplicationTemplate.insertAfterPlacenames(ww, layer);
+		    
+		    
+		    
+		    // Add a select listener in order to determine when a label is clicked on.
+		    ww.addSelectListener(new SelectListener(){                
+				public void selected(SelectEvent event) {					
+					 PickedObject po = event.getTopPickedObject();
+					 
+					// if (event.getEventAction().equals(SelectEvent.LEFT_CLICK))
+
+					 									 
+	                 if (po != null && po.getObject() instanceof PointPlacemark){
+	                       if (event.getEventAction().equals(SelectEvent.LEFT_CLICK)){
+	                    	   
+	            
+	                          PointPlacemark placemark = (PointPlacemark) po.getObject();
+	                          String labelText = placemark.getStringValue(AVKey.DISPLAY_NAME);
+	                          
+	                          String[] data = labelText.split("Link: ");
+
+	                          
+	                          if(data[1].length() >= 2){
+	                        	  
+	                        	  CallURL(data[1]);
+	                          }
+	                        	  
+	                               
+	                                event.consume();
+	                        }
+	                    }
+				}
+            });
 		}
+		
+		
+		
+		
 	}
 	
 	public void clearMap(){
