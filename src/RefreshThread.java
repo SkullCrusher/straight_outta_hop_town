@@ -4,7 +4,12 @@ public class RefreshThread extends Thread{
 	private String threadName;
 	private int sleepTime;
 	private Thread t;
+	private static R_Parser parser;
 	private boolean running= true;
+	
+	public void setParser(R_Parser parser){
+		this.parser = parser;
+	}
 	
 	@Override
 	public void run(){
@@ -15,15 +20,15 @@ public class RefreshThread extends Thread{
 				throw new InterruptedException();
 			}
 			if(running){
-				Thread.sleep(this.sleepTime);
-				System.out.println("refreshing--"+this.threadName+"--"+this.sleepTime);
-				R_Parser parser = new R_Parser();
+				Thread.sleep(this.sleepTime*60*100);//this way sleep time setting is like number of minutes
+		//		System.out.println("refreshing--"+this.threadName+"--"+this.sleepTime);
+					if(running){
 				parser.Parse(this.threadName);//thread named after area code
-				}
+				}}
 			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Another one bites the dust");
+			//System.out.println("Another one bites the dust");
 			this.running = false;
 		}
 	}

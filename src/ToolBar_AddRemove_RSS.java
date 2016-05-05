@@ -28,6 +28,33 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	
 	public ToolBar_AddRemove_RSS(){
 		windowOpen = false;
+		String[] RSS_List = {  
+				 "Alabama", "Alaska",
+				 "America Samoa", "Arizona", "Arkansas",
+				 "California", "Colorado", "Connecticut",
+				 "Delaware", "District of Columbia", "Florida",
+				 "Georgia", "Guam", "Hawaii", "Idaho", 
+				 "Illinois", "Indiana", "Iowa",
+				 "Kansas", "Kentucky", "Louisiana",
+				 "Maine", "Marianas", "Maryland",
+				 "Massachusetts", "Michigan", "Midway Island",
+				 "Minnesota", "Mississippi", "Missouri",
+				 "Montana", "Nevada", "Nebraska",
+				 "New Hampshire", "New Jersey", "New Mexico",
+				 "New York", "North Carolina", "North Dakota",
+				 "Ohio", "Oklahoma", "Oregon",
+				 "Pennsylvania", "Puerto Rico", "Rhode Island",
+				 "South Carolina", "South Dakota", "Tennessee",
+				 "Texas", "Utah", "Vermont", "Virgin Islands",
+				 "Virginia", "Washington", "West Virginia",
+				 "Wisconsin", "Wyoming"};
+					
+				if(RSS_Disabled_List.size()==0){
+					for(int i=0; i<RSS_List.length; i++){
+						RSS_Disabled_List.add(RSS_List[i]);
+					}
+				}
+	
 	}
 	
 	// If the window is currently open.
@@ -192,6 +219,133 @@ public class ToolBar_AddRemove_RSS extends Observable {
 	    notifyObservers(this);
 	}
 	
+	public String Get_Name_From_Code(String cc){
+		switch (cc){
+		case "al":
+			return "Alabama";
+		case "ak":
+			return"Alaska";
+		case "as":
+			return "America Samoa";
+		case "az":
+			return "Arizona";
+		case "ar":
+			return "Arkansas";
+		case "ca":
+			return "California";
+		case "co":
+			return "Colorado";
+		case "ct":
+			return "Connecticut";
+		case "de":
+			return "Delaware";
+		case "dc":
+			return "District of Columbia";
+		case "fl":
+			return "Florida";
+		case "ga":
+			return "Georgia";
+		case "gu":
+			return "Guam";
+		case "hi":
+			return "Hawaii";
+		case "id":
+			return "Idaho";
+		case "il":
+			return "Illinois";
+		case "in":
+			return "Indiana";
+		case "ia":
+			return "Iowa";
+		case "ks":
+			return "Kansas";
+		case "ky":
+			return "Kentucky";
+		case  "la":
+			return "Louisiana";
+		case "me":
+			return "Maine";
+		case "mp":
+			return "Marianas";
+		case "md":
+			return "Maryland";
+		case  "ma":
+			return "Massachusetts";
+		case "mi":
+			return "Michigan";
+		case "um":
+			return "Midway Island";
+		case "mn":
+			return "Minnesota";
+		case "ms":
+			return "Mississippi";
+		case "mo":
+			return "Missouri";
+		case "mt":
+			return "Montana";
+		case "nv":
+			return "Nevada";
+		case "ne":
+			return "Nebraska";
+		case "nh":
+			return "New Hampshire";
+		case "nj":
+			return "New Jersey";
+		case "nm":
+			return "New Mexico";
+		case "ny":
+			return "New York";
+		case "nc":
+			return "North Carolina";
+		case "nd":
+			return "North Dakota";
+		case "oh":
+			return "Ohio";
+		case "ok":
+			return "Oklahoma";
+		case "or":
+			return "Oregon";
+		case "pa":
+			return "Pennsylvania";
+		case "pr":
+			return "Puerto Rico";
+		case "ri":
+			return "Rhode Island";
+		case "sc":
+			return "South Carolina";
+		case "sd":
+			return "South Dakota";
+		case "tn":
+			return "Tennessee";
+		case "tx":
+			return "Texas";
+		case "ut":
+			return "Utah";
+		case "vt":
+			return "Vermont";
+		case "vi":
+			return "Virgin Islands";
+		case "va":
+			return "Virginia";
+		case "wa":
+			return "Washington";
+		case "wv":
+			return "West Virginia";
+		case "wi":
+			return "Wisconsin";
+		case "wy":
+			return "Wyoming";			
+	}
+	return "";
+	}
+	
+	public void Add_Feed_From_File(String cc){
+		String name = Get_Name_From_Code(cc);
+		int index = RSS_Disabled_List.indexOf(name);
+		//System.out.println(index+" "+name+" "+RSS_Disabled_List.get(1));
+		AddRSS(index);
+	}
+	
 	public void Create() {
 	
 	// Prevent multiple windows from being opened.
@@ -210,32 +364,7 @@ public class ToolBar_AddRemove_RSS extends Observable {
         JPanel CS_Panel = new JPanel(new GridLayout(0, 1, 0, 0));
         CS_Panel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
           
-		String[] RSS_List = {  
-		 "Alabama", "Alaska",
-		 "America Samoa", "Arizona", "Arkansas",
-		 "California", "Colorado", "Connecticut",
-		 "Delaware", "District of Columbia", "Florida",
-		 "Georgia", "Guam", "Hawaii", "Idaho", 
-		 "Illinois", "Indiana", "Iowa",
-		 "Kansas", "Kentucky", "Louisiana",
-		 "Maine", "Marianas", "Maryland",
-		 "Massachusetts", "Michigan", "Midway Island",
-		 "Minnesota", "Mississippi", "Missouri",
-		 "Montana", "Nevada", "Nebraska",
-		 "New Hampshire", "New Jersey", "New Mexico",
-		 "New York", "North Carolina", "North Dakota",
-		 "Ohio", "Oklahoma", "Oregon",
-		 "Pennsylvania", "Puerto Rico", "Rhode Island",
-		 "South Carolina", "South Dakota", "Tennessee",
-		 "Texas", "Utah", "Vermont", "Virgin Islands",
-		 "Virginia", "Washington", "West Virginia",
-		 "Wisconsin", "Wyoming"};
-			
-		if(RSS_Disabled_List.size()==0){
-			for(int i=0; i<RSS_List.length; i++){
-				RSS_Disabled_List.add(RSS_List[i]);
-			}
-		}
+
 		
 		JComboBox Select_Add = new JComboBox(RSS_Disabled_List.toArray());
 		JComboBox Select_Remove = new JComboBox(RSS_Enabled_List.toArray());

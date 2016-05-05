@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class FileIO {
 
-	public static void LoadFeeds(Data_Manager arg){
+	public static void LoadFeeds(Data_Manager arg, ToolBar bar){
 		
 		 String current = System.getProperty("user.dir");
 	      System.out.println("Current working directory in Java : " + current);
@@ -48,14 +48,14 @@ public class FileIO {
 	    	  }catch(Exception e){	    		 
 	    		  return;  // Invalid file so reject.
 	    	  }
-	    	  	    	  
-	    	  arg.AddRSSFeedFromFile(RSS_FEED, Refresh_Delay);
+	    	  bar.Add_Feed_From_File(RSS_FEED);    	  
+	    	  //arg.AddRSSFeedFromFile(RSS_FEED, Refresh_Delay);
 	      }	   
 	      
 		return;
 	}
 	
-	public static void DumpFeeds(){
+	public static void DumpFeeds(Data_Manager arg){
 			
 		String current = System.getProperty("user.dir");
 
@@ -69,9 +69,9 @@ public class FileIO {
 			return;
 		}
 		
-		for(int i = 0; i < Data_Manager.GetRSSSize();i++){			
-	     	writer.println(Data_Manager.GetString(i));
-	     	writer.println(Integer.toString(Data_Manager.GetDelay(i)));	      
+		for(int i = 0; i < arg.GetRSSSize();i++){			
+	     	writer.println(arg.GetString(i));
+	     	writer.println(Integer.toString(arg.GetDelay(i)));	      
 		}
 		
 		writer.close();

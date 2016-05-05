@@ -2,11 +2,15 @@ package package_1;
 
 public class RequestThread extends Thread{
 	private String areaCode;
+	private static R_Parser parser;
 	private Thread t;
 	@Override
 	public void run(){
-			R_Parser parser = new R_Parser();
 			parser.Parse(areaCode);
+	}
+	
+	public void setParser(R_Parser parser){
+		this.parser = parser;
 	}
 	
 	public void start(){

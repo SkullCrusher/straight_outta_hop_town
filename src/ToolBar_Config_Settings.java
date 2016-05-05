@@ -19,9 +19,14 @@ import javax.swing.table.AbstractTableModel;
 public class ToolBar_Config_Settings extends Observable {
 	
 	public JTable table = null;
+	private static Data_Manager data_manager;
+	
+	public void setDataManager(Data_Manager data_manager){
+		this.data_manager = data_manager;
+	}
 	
     class MyTableModel extends AbstractTableModel {
-
+    	
     	
     	public ArrayList<String> columnNames = new ArrayList();
     	
@@ -35,17 +40,14 @@ public class ToolBar_Config_Settings extends Observable {
 			columnNames.add(new String("Refresh time"));
 			columnNames.add(new String("Display"));
 			
-				// Load in the currently added RSS feeds.			
-			Data_Manager temp = new Data_Manager();
-			
 				// Add each RSS feed.
-			for(int i = 0; i < temp.RSS_FEEDS.size(); i++){
+			for(int i = 0; i < data_manager.RSS_FEEDS.size(); i++){
 				
 					// This is brutal.
 				Object[] t1 = {
-						temp.StateCodeToState(temp.RSS_FEEDS.get(i).RSS_FEED),   
-						temp.RSS_FEEDS.get(i).Refresh_Delay,  
-						temp.RSS_FEEDS.get(i).Enabled};
+						data_manager.StateCodeToState(data_manager.RSS_FEEDS.get(i).RSS_FEED),   
+						data_manager.RSS_FEEDS.get(i).Refresh_Delay,  
+						data_manager.RSS_FEEDS.get(i).Enabled};
 				
 				data.add(t1);
 			}			

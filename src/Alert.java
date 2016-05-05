@@ -69,12 +69,58 @@ public class Alert {
 		return expTime;
 	}
 	public void setExpTime(String expTime) {
+		String[] tmp = expTime.split("T"); //5/5/16 12:00 PM
+		String[] date = tmp[0].split("-");
+		String time = tmp[1];
+		String ampm;
+		time = time.split("-")[0];
+		String [] hms = time.split(":");
+	    Integer h = Integer.parseInt(hms[0]);
+	    if(h>12){
+	    	h = h-12;
+	    	ampm = "PM";
+	    } else {
+	    	ampm = "AM";
+	    }
+	    time = h.toString()+":"+hms[1]+" "+ampm;
+		date[0].replace("20", "");
+		if(date[1].startsWith("0")){
+			date[1] = date[1].substring(1, 2);
+		}
+		if(date[2].startsWith("0")){
+			date[2] = date[2].substring(1, 2);
+		}
+		date[0] = date[2]+"/"+date[1]+"/"+date[0]+" ";
+		expTime = date[0]+time;
 		this.expTime = expTime;
 	}
 	public String getEffTime() {
 		return effTime;
 	}
 	public void setEffTime(String effTime) {
+		String[] tmp = effTime.split("T"); //5/5/16 12:00 PM
+		String[] date = tmp[0].split("-");
+		String time = tmp[1];
+		String ampm;
+		time = time.split("-")[0];
+		String [] hms = time.split(":");
+	    Integer h = Integer.parseInt(hms[0]);
+	    if(h>12){
+	    	h = h-12;
+	    	ampm = "PM";
+	    } else {
+	    	ampm = "AM";
+	    }
+	    time = h.toString()+":"+hms[1]+" "+ampm;
+		date[0].replace("20", "");
+		if(date[1].startsWith("0")){
+			date[1] = date[1].substring(1, 2);
+		}
+		if(date[2].startsWith("0")){
+			date[2] = date[2].substring(1, 2);
+		}
+		date[0] = date[2]+"/"+date[1]+"/"+date[0]+" ";
+		effTime = date[0]+time;
 		this.effTime = effTime;
 	}
 	public String getEvent() {

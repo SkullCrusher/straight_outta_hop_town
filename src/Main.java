@@ -37,7 +37,7 @@ public class Main extends ApplicationTemplate
             	// The death will save the little ones with love.
             this.addWindowListener(new WindowAdapter(){
             	public void windowClosing(WindowEvent e){
-            		FileIO.DumpFeeds();
+            		FileIO.DumpFeeds(Manager);
             	}	
             });
             
@@ -198,8 +198,7 @@ public class Main extends ApplicationTemplate
     	GUI_Toolbar = new ToolBar();
     	Manager = new Data_Manager();
     	
-    		// Load the config file is possible.  	
-    	FileIO.LoadFeeds(Manager);
+
     	
     	
     	
@@ -226,7 +225,12 @@ public class Main extends ApplicationTemplate
        plotter.setWw(ww);
        
        GUI_Toolbar.SetOb(Manager);
-      /* 
+       GUI_Toolbar.setDataManager(Manager);
+		
+       // Load the config file is possible.  	
+       FileIO.LoadFeeds(Manager, GUI_Toolbar);
+	
+       /* 
        R_Parser parser = new R_Parser();
        //this layer and map need to go everywhere bassically because thats the only way to interact
        // with the existing objects

@@ -34,7 +34,7 @@ public class Plotter {
 		//	PointPlacemark ppm = new PointPlacemark(rssUnit.getPosition());
 		Position pos;
 		if(!applyFilters(rssUnit)){
-			System.out.println("No plot");
+		//	System.out.println("no plot");
 			return;//no plot
 		}
 		PointPlacemarkAttributes attrs = new PointPlacemarkAttributes();
@@ -59,7 +59,7 @@ public class Plotter {
 	}
 	
 	public void clearMap(){
-		System.out.println("ahoy");
+	//	System.out.println("ahoy");
 		layer.removeAllRenderables();
 	}
 
@@ -80,22 +80,21 @@ public class Plotter {
 	}
 	Plotter(){
 		filterParams = new Filters();
-		setFilterParams("","","","", false,false,false,false,false,false,false,false);
+		setFilterParams("","", false,false,false,false,false,false,false,false);
+	}
+	
+	public void resetFilters(){
+		setFilterParams("","", false,false,false,false,false,false,false,false);
 	}
 	
 	
-	public void setFilterParams(String State, String City, String BeforeDateTime ,
+	public void setFilterParams(String BeforeDateTime ,
 			                       String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, 
 			                        boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, 
 			                        boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
-		filterParams.State = State;
-		filterParams.City = City;
 		filterParams.BeforeDateTime = BeforeDateTime;
 		filterParams.AfterDateTime = AfterDateTime;
 		filterParams.Severity_Severe = Severity_Severe;
-		if(Severity_Severe){
-			System.out.println("oi got me anotha one ser");
-		}
 		filterParams.Severity_Moderate = Severity_Moderate;
 		filterParams.Severity_Minor = Severity_Minor;
 		filterParams.Severity_Unknown = Severity_Unknown;
@@ -106,10 +105,7 @@ public class Plotter {
 	}
 	
 	public Boolean applyFilters(Alert rssUnit){
-		System.out.println(rssUnit.getSeverity()+"-");
-		if(filterParams.Severity_Severe){
-			System.out.println("OI! he appears to still be with us cap'n!");
-		}
+	//	System.out.println(rssUnit.getSeverity()+"-");
 		switch(rssUnit.getSeverity()){
 			case "Unknown":
 				if(filterParams.Severity_Unknown){
@@ -155,7 +151,20 @@ public class Plotter {
 					return false;
 				}
 		}
-
+		if(!rssUnit.getEffTime().isEmpty()){
+	//		System.out.println(rssUnit.getEffTime()+" "+rssUnit.getExpTime());
+			if(!filterParams.BeforeDateTime.isEmpty()||!filterParams.AfterDateTime.isEmpty()){
+				if((rssUnit.getExpTime().compareTo(filterParams.BeforeDateTime))>=0){
+					System.out.println("Too early");
+					return false;
+				}
+				if((rssUnit.getEffTime().compareTo(filterParams.AfterDateTime))<=0){
+					System.out.println("Too late");
+					return false;
+				}
+			}
+		}
+	//	System.out.println("should plot");
 		return true;
 	}
 }

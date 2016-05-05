@@ -12,27 +12,37 @@ import javax.swing.JTextField;
 
 public class Data_Manager implements Observer {
 	private Plotter plotter;
+	
+	Data_Manager(){
+		this.plotter = new Plotter();
+		RequestThread rt = new RequestThread();
+		RefreshThread rft = new RefreshThread();
+		R_Parser parser = new R_Parser(plotter);
+		rt.setParser(parser);
+		rft.setParser(parser);
+	}
+	
 	final class Feed{
 		String RSS_FEED = ""; // This is the state code not the state name.
-		int Refresh_Delay = 300000;
+		int Refresh_Delay = 5;
 		boolean Enabled = true;
 	}
 	
 		// A container for all of the feeds that have been added to the map.
-	public static ArrayList<Feed> RSS_FEEDS = new ArrayList<Feed>();
-	public static ArrayList<RefreshThread> REF_THREADS = new ArrayList<RefreshThread>();
+	public ArrayList<Feed> RSS_FEEDS = new ArrayList<Feed>();
+	public ArrayList<RefreshThread> REF_THREADS = new ArrayList<RefreshThread>();
 	
-	public static int GetRSSSize(){
+	public int GetRSSSize(){
 		return RSS_FEEDS.size();
 	}
 	
 		// Gets the delay of a RSS_Feed.
-	public static String GetString(int index){
+	public String GetString(int index){
 		return RSS_FEEDS.get(index).RSS_FEED;
 	}
 	
 		// Gets the delay of a index.
-	public static int GetDelay(int index){
+	public int GetDelay(int index){
 		return RSS_FEEDS.get(index).Refresh_Delay;
 	}
 	
@@ -49,10 +59,6 @@ public class Data_Manager implements Observer {
 		RSS_FEEDS.add(Temp);
 	}
 	
-	Data_Manager(){
-		plotter = new Plotter();
-	}
-
 		// This takes a full name of the RSS feed and returns the state code.
 	public String StateToStateCode(String arg){
 					
@@ -168,7 +174,7 @@ public class Data_Manager implements Observer {
 			if(RSS_FEEDS.get(i) == null){
 				continue;
 			}
-			
+			System.out.println(RSS_FEEDS.get(i).RSS_FEED);
 			if(RSS_FEEDS.get(i).Enabled==true){
 				RequestThread rt = new RequestThread();
 				rt.setAreaCode(RSS_FEEDS.get(i).RSS_FEED);
@@ -187,7 +193,6 @@ public class Data_Manager implements Observer {
 	public static void removeIfExists(ArrayList<RefreshThread> refList, String name){
 		for (int i=0; i<refList.size(); i++){
 			if(refList.get(i).getThreadName().equals(name)){
-				System.out.println("interrupted?");
 				refList.get(i).interrupt();
 				refList.get(i).setRunning(false);//kind of a hack, but interrupt wasn't working for me	
 				refList.remove(refList.indexOf(refList.get(i)));
@@ -198,12 +203,12 @@ public class Data_Manager implements Observer {
 	
 		// This resets the search settings.
 	private void Search_Reset(){
-		
-		System.out.println("hjk");
+		plotter.resetFilters();
+		//System.out.println("hjk");
 	}
 		// Search settings.
 	private void Search_Set(String State, String City, String BeforeDateTime , String AfterDateTime, boolean Severity_Severe, boolean Severity_Moderate, boolean Severity_Minor, boolean Severity_Unknown, boolean Urgency_Expected, boolean Urgency_Future, boolean Urgency_Immediate, boolean Urgency_Unknown){
-		plotter.setFilterParams(State, City, BeforeDateTime, AfterDateTime, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);
+		plotter.setFilterParams(BeforeDateTime, AfterDateTime, Severity_Severe, Severity_Moderate, Severity_Minor, Severity_Unknown, Urgency_Expected, Urgency_Future, Urgency_Immediate, Urgency_Unknown);
 		Rerender();
 	}
 	
@@ -230,6 +235,8 @@ public class Data_Manager implements Observer {
 						// Jordan thinks this works
 					for(int i = 0; i < RSS_FEEDS.size(); i++){						
 						if(RSS_FEEDS.get(i).RSS_FEED.equals((String) temp.RSS)){
+							//remove all threads too
+							removeIfExists(REF_THREADS, RSS_FEEDS.get(i).RSS_FEED);
 							RSS_FEEDS.remove(i);
 						}
 					}	
@@ -294,9 +301,6 @@ public class Data_Manager implements Observer {
 				 
 							
 				boolean Severity_Severe = temp.Severity_Severe.isSelected();
-				if(Severity_Severe){
-					System.out.println("got me one ser");
-				}
 				boolean Severity_Moderate = temp.Severity_Moderate.isSelected();
 				boolean Severity_Minor = temp.Severity_Minor.isSelected();
 				boolean Severity_Unknown = temp.Severity_Unknown.isSelected();

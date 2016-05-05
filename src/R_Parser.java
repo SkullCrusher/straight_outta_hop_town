@@ -25,12 +25,17 @@ import java.net.URLEncoder;
 
 
 public class R_Parser {
+	static Plotter plotter;
+	
+	R_Parser(Plotter plotter){
+		this.plotter = plotter;
+	}
 	
 	public void Parse(String areaCode){		
 
 			String html = request("http://alerts.weather.gov/cap/"+areaCode+".php?x=1");
 			Alert newAlert = new Alert();
-		    Plotter plotter = new Plotter();
+		    //Plotter plotter = new Plotter();
 	//	    Position pos = new Position(null, null,0);
 			
 		//    System.out.println(html);
@@ -119,7 +124,7 @@ public class R_Parser {
 						//System.out.println(areaTitle);
 						String encoded = URLEncoder.encode(areaTitle, "UTF-8");
 					//	Strimg stateName =
-						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?address="+encoded+","+areaCode+",USA";
+						String googleRequestUrl = "https://maps.googleapis.com/maps/api/geocode/xml?key=AIzaSyBJ76ItgE5uXIwoAPVisnveLH5d9NnN2OI&address="+encoded+","+areaCode+",USA";
 						String googleResult = request(googleRequestUrl);
 						//System.out.println(encoded+","+areaCode+",USA");
 						//System.out.println(googleResult);

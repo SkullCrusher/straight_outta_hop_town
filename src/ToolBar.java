@@ -37,4 +37,12 @@ public class ToolBar {
 		AddRemove.Create();
 	}
 	
+	public void setDataManager(Data_Manager dm){
+		Config_Settings.setDataManager(dm);
+	}
+	
+	public void Add_Feed_From_File(String cc){
+		AddRemove.Add_Feed_From_File(cc);
+	}
+	
 }
