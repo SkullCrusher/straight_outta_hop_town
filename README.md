@@ -1,5 +1,3 @@
-<snippet>
-  <content><![CDATA[
 # straight_outta_hop_town
 A application that uses the NASA world wind SDK to create a simple GUI for the RSS feed information provided by the natural weather service.
 ##Building instructions:
@@ -33,6 +31,3 @@ MIT License: Enjoy!
 Dependencies: NASA Open Source Agreement v1.3
 ## Extra Information
 Thug life is not a choice, it is destiny.
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
