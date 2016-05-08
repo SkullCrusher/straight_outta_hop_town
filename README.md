@@ -2,16 +2,16 @@
 A application that uses the NASA world wind SDK to create a simple GUI for the RSS feed information provided by the natural weather service.
 
 #Building instructions:
-1.	Clone the svn repository into a clean directory. After a successful clone there will be two directories within the folder named “dependents” and “src”.
+1.	Clone the git repository into a clean directory. Also download the NASA World Wind dependencies from http://worldwind.arc.nasa.gov/java/ 
 2.	Launch Eclipse IDE (other Java compilers can be used but have not been tested).
 3.	Create a new workspace that is not contained within the clean svn repository directory.
 4.	Create a new project titled “straight_outta_hop_town_git”.
 5.	Create a new package inside this project titled “package_1”.
-6.	With any file explorer navigate to the newly cloned svn repository from step one. Next, open the folder named “src” which should contain Java source files.
+6.	With any file explorer navigate to the newly cloned git repository from step one. Next, open the folder where the cloned which should contain Java source files.
 7.	Select all of the files and drag them into “package_1” created in step 4 within Eclipse IDE. When prompted select to link to files.
 8.	Right click on the “straight_outta_hop_town_git” project in the package explorer of Eclipse IDE and select properties.
 9.	Select Java Build Path and in that menu click libraries.
-10.	Click the “Add External JARs…” button and navigate to the cloned svn repository from step 1. Open the “dependents” folder and select all of the JAR files from within and click okay.
+10.	Click the “Add External JARs…” button and navigate to the downloaded NASA world wind dependencies from step 1. Select all of the JAR files and click okay.
 11.	Click on the “Apply” button and then the “Ok” button.
 12.	(Optional) To insure that the steps 1 through 11 were done correctly the application can be launched by clicking the “Run” menu item and selecting “Run”. If the application is unable to run check that each step before was done correctly.
 13.	On the top menu bar of Ellipse IDE click “File” and then “Export…”.
