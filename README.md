@@ -33,6 +33,7 @@ A application that uses the NASA world wind SDK to create a simple GUI for the R
 
 # License
 MIT License: Enjoy!
+
 Dependencies: NASA Open Source Agreement v1.3
 
 # Extra Information
