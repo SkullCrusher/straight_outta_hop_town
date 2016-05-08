@@ -1,4 +1,4 @@
-# straight_outta_hop_town
+# Weather RSS - by team straight_outta_hop_town
 A application that uses the NASA world wind SDK to create a simple GUI for the RSS feed information provided by the natural weather service.
 
 #Building instructions:
