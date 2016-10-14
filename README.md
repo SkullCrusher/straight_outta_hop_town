@@ -32,7 +32,7 @@ A application that uses the NASA world wind SDK to create a simple GUI for the R
 2. David Harkins
 
 # License
-MIT License: Enjoy!
+GPL-2.0 License: Enjoy!
 
 Dependencies: NASA Open Source Agreement v1.3
 
