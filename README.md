@@ -27,7 +27,7 @@ A application that uses the NASA world wind SDK to create a simple GUI for the R
 2.	The user can run the JAR file to use the application.
 3.	(Optional) A short cut can be created that links to the JAR file to make it easier for the user to launch the application.
 
-# Credits
+# Authors
 1. Jordan Hendry
 2. David Harkins
 
